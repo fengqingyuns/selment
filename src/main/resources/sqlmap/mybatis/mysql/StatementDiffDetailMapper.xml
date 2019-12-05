@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--suppress ALL -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hanyun.platform.settle.dao.StatementDiffDetailDao">
+    <resultMap id="BaseResultMap" type="com.hanyun.platform.settle.domain.StatementDiffDetail">
+        <result column="trans_id" property="transId" jdbcType="VARCHAR"/>
+        <result column="pay_id" property="payId" jdbcType="VARCHAR"/>
+        <result column="brand_id" property="brandId" jdbcType="VARCHAR"/>
+        <result column="store_id" property="storeId" jdbcType="VARCHAR"/>
+        <result column="order_id" property="orderId" jdbcType="VARCHAR"/>
+        <result column="order_time" property="orderTime" jdbcType="TIMESTAMP"/>
+        <result column="order_amount" property="orderAmount" jdbcType="BIGINT"/>
+        <result column="pay_amount" property="payAmount" jdbcType="BIGINT"/>
+        <result column="pay_type" property="payType" jdbcType="VARCHAR"/>
+        <result column="settle_type" property="settleType" jdbcType="BIT"/>
+        <result column="operate_type" property="operateType" jdbcType="SMALLINT"/>
+        <result column="amount" property="amount" jdbcType="BIGINT"/>
+        <result column="status" property="status" jdbcType="SMALLINT"/>
+        <result column="finish_time" property="finishTime" jdbcType="TIMESTAMP"/>
+        <result column="diff_status" property="diffStatus" jdbcType="SMALLINT"/>
+        <result column="diff_src" property="diffSrc" jdbcType="SMALLINT"/>
+        <result column="diff_type" property="diffType" jdbcType="SMALLINT"/>
+        <result column="report_time" property="reportTime" jdbcType="TIMESTAMP"/>
+        <result column="solve_time" property="solveTime" jdbcType="TIMESTAMP"/> 
+        <result column="diff_desc" property="diffDesc" jdbcType="VARCHAR"/>
+        <result column="solve_type" property="solveType" jdbcType="SMALLINT"/>
+        <result column="solve_desc" property="solveDesc" jdbcType="VARCHAR"/>       
+        <result column="mch_fee" property="mchFee" jdbcType="INTEGER"/>
+        <result column="mch_fee_rate" property="mchFeeRate" jdbcType="INTEGER"/>
+        <result column="mch_fee_max" property="mchFeeMax" jdbcType="INTEGER"/>
+		<result column="order_document_id" property="orderDocumentId" jdbcType="VARCHAR"/>
+	</resultMap>
+
+		
+    <!-- 查询条数 -->	
+	<select id="selectCount" parameterType="com.hanyun.platform.settle.vo.StatementDiffReq" resultType="java.lang.Integer">
+		SELECT
+			count(1)
+		FROM
+		statement_diff AS a
+		LEFT JOIN
+		pay_transaction AS b ON a.trans_id = b.trans_id
+		LEFT JOIN
+		payment AS c ON b.pay_id = c.pay_id
+		<where>
+			<if test="brandId != null and brandId != ''">
+				and a.brand_id = #{brandId}
+			</if>
+			<if test="storeId != null and storeId != ''">
+				and a.store_id = #{storeId}
+			</if>
+
+			<if test="diffSrc != null">
+				and a.diff_src = #{diffSrc}
+			</if>
+			<if test="diffStatus != null">
+				and a.diff_status = #{diffStatus}
+			</if>
+			<if test="reportStartTime != null ">
+				and report_time <![CDATA[>=]]> #{reportStartTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="reportEndTime != null">
+				and report_time <![CDATA[<=]]> #{reportEndTime,jdbcType=TIMESTAMP}
+			</if>
+        </where>
+	</select>
+
+    <!-- 查询信息 -->    
+	<select id="statementDiffDetailList" parameterType="com.hanyun.platform.settle.vo.StatementDiffReq" resultMap="BaseResultMap">
+			SELECT 
+			    b.trans_id,
+				b.pay_id,
+			    b.brand_id,
+			    b.store_id,
+			    b.order_id,
+			    c.order_amount,
+			    c.order_time,
+			    c.pay_amount,
+			    b.pay_type,
+		 		b.settle_type,
+				b.mch_fee_rate,
+			    b.mch_fee_max,
+			    b.mch_fee,
+			    b.operate_type,
+			    b.amount,
+			    b.status,
+				b.order_document_id,
+			    b.finish_time,
+				a.diff_status,
+			    a.diff_src,
+			    a.report_time,
+			    a.diff_type,
+		        b.order_document_id
+			    FROM
+			    statement_diff AS a
+			        LEFT JOIN
+			    pay_transaction AS b ON a.trans_id = b.trans_id
+			        LEFT JOIN
+			    payment AS c ON b.pay_id = c.pay_id
+	    <where>
+		   	<if test="brandId != null and brandId != ''">
+        		and a.brand_id = #{brandId}
+        	</if>			 
+        	<if test="storeId != null and storeId != ''">
+        		and a.store_id = #{storeId}
+        	</if>
+		   		 	  
+        	<if test="diffSrc != null">
+        		and a.diff_src = #{diffSrc}
+        	</if>			 
+        	<if test="diffStatus != null">
+        		and a.diff_status = #{diffStatus}
+        	</if>		  
+			<if test="reportStartTime != null ">
+				and report_time <![CDATA[>=]]> #{reportStartTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="reportEndTime != null">
+				and report_time <![CDATA[<=]]> #{reportEndTime,jdbcType=TIMESTAMP}
+			</if>
+        </where>
+               order by report_time desc  
+         	   LIMIT #{beginIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+		</select>
+		
+	<select id="selectStatementDiffDetailByTransId" parameterType="com.hanyun.platform.settle.vo.StatementDiffReq" resultMap="BaseResultMap">
+			SELECT 
+			    a.trans_id,
+				b.pay_id,
+			    b.brand_id,
+			    b.store_id,
+			    b.order_id,
+			    c.order_amount,
+			    c.order_time,
+			    c.pay_amount,
+			    b.pay_type,
+			    b.settle_type,
+			    b.mch_fee_rate,
+			    b.mch_fee_max,
+			    b.mch_fee,
+			    b.operate_type,
+			    b.amount,
+			    b.status,
+			    b.finish_time,
+			    b.order_document_id,
+				a.diff_status,
+			    a.diff_src,
+			    a.report_time,
+			    a.solve_time,
+			    a.diff_type,
+			    a.diff_desc,
+			    a.solve_type,
+			    a.solve_desc
+			    FROM
+			    pay_transaction AS b
+			        LEFT JOIN
+			    payment AS c ON b.pay_id = c.pay_id
+			        LEFT JOIN
+                statement_diff AS a ON a.trans_id = b.trans_id
+                where b.trans_id = #{transId}
+		</select>
+
+	<select id="expStatementDiffListResultList" parameterType="com.hanyun.platform.settle.vo.StatementDiffReq" resultMap="BaseResultMap">
+			SELECT 
+			    a.trans_id,
+				b.pay_id,
+			    b.brand_id,
+			    b.store_id,
+			    b.order_id,
+			    c.order_amount,
+			    c.order_time,
+			    c.pay_amount,
+			    b.pay_type,
+			    b.settle_type,
+			    b.mch_fee_rate,
+                b.mch_fee_max,
+                b.mch_fee,
+			    b.operate_type,
+			    b.amount,
+			    b.status,
+			    b.finish_time,
+				a.diff_status,
+			    a.diff_src,
+			    a.report_time,
+			    a.diff_type
+			    FROM
+			    statement_diff AS a
+			        LEFT JOIN
+			    pay_transaction AS b ON a.trans_id = b.trans_id
+			        LEFT JOIN
+			    payment AS c ON b.pay_id = c.pay_id
+	    <where> 		   
+        	<if test="brandId != null and brandId != ''">
+        		and a.brand_id = #{brandId}
+        	</if>			 
+        	<if test="storeId != null and storeId != ''">
+        		and a.store_id = #{storeId}
+        	</if>
+        	<if test="diffSrc != null">
+        		and a.diff_src = #{diffSrc}
+        	</if>			 
+        	<if test="diffStatus != null">
+        		and a.diff_status = #{diffStatus}
+        	</if>		  
+			<if test="reportStartTime != null ">
+				and report_time <![CDATA[>=]]> #{reportStartTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="reportEndTime != null">
+				and report_time <![CDATA[<=]]> #{reportEndTime,jdbcType=TIMESTAMP}
+			</if>		    
+        </where>
+        		order by report_time desc
+		</select>			    
+</mapper>

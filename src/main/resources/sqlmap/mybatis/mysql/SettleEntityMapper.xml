@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--suppress ALL -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hanyun.platform.settle.dao.SettleEntityDao">
+    <resultMap id="BaseResultMap" type="com.hanyun.platform.settle.domain.SettleEntity">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="entity_id" property="entityId" jdbcType="VARCHAR"/>
+        <result column="entity_name" property="entityName" jdbcType="VARCHAR"/>
+        <result column="entity_type" property="entityType" jdbcType="TINYINT"/>
+        <result column="brand_id" property="brandId" jdbcType="VARCHAR"/>
+        <result column="store_id" property="storeId" jdbcType="VARCHAR"/>
+        <result column="separate_settle" property="separateSettle" jdbcType="TINYINT"/>
+        <result column="capital_collect" property="capitalCollect" jdbcType="TINYINT"/>
+        <result column="capital_collect_type" property="capitalCollectType" jdbcType="TINYINT"/>
+        <result column="settle_circle" property="settleCircle" jdbcType="SMALLINT"/>
+        <result column="last_settle_time" property="lastSettleTime" jdbcType="TIMESTAMP"/>
+        <result column="avail_status" property="availStatus" jdbcType="TINYINT"/>
+        <result column="commission_settlement_switch" property="commissionSettlementSwitch" jdbcType="TINYINT"/>
+        <result column="turnover_points" property="turnoverPoints" jdbcType="BIGINT"/>
+        <result column="online_commission" property="onlineCommission" jdbcType="TINYINT"/>
+        <result column="commission_settlement_circle" property="commissionSettlementCircle" jdbcType="TINYINT"/>
+        <result column="commission_last_settle_time" property="commissionLastSettleTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, create_time, update_time, entity_id, entity_name, entity_type, brand_id, store_id, separate_settle, capital_collect, capital_collect_type, settle_circle, last_settle_time, avail_status, commission_settlement_switch, turnover_points, online_commission, commission_settlement_circle, commission_last_settle_time
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        SELECT 
+        <include refid="Base_Column_List"/>
+        FROM settle_entity
+        WHERE id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="selectBySettleSetting" resultMap="BaseResultMap" parameterType="com.hanyun.platform.settle.domain.SettleEntity">
+        SELECT
+          <include refid="Base_Column_List"/>
+        FROM settle_entity
+        <where>
+            <if test="createTime != null">
+                AND create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null">
+                AND update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="entityId != null">
+                AND entity_id = #{entityId,jdbcType=VARCHAR}
+            </if>
+            <if test="entityName != null">
+                AND entity_name = #{entityName,jdbcType=VARCHAR}
+            </if>
+            <if test="entityType != null">
+                AND entity_type = #{entityType,jdbcType=TINYINT}
+            </if>
+            <if test="brandId != null">
+                AND brand_id = #{brandId,jdbcType=VARCHAR}
+            </if>
+            <if test="storeId != null">
+                AND store_id = #{storeId,jdbcType=VARCHAR}
+            </if>
+            <if test="separateSettle != null">
+                AND separate_settle = #{separateSettle,jdbcType=TINYINT}
+            </if>
+            <if test="capitalCollect != null">
+                AND capital_collect = #{capitalCollect,jdbcType=TINYINT}
+            </if>
+            <if test="capitalCollectType != null">
+                AND capital_collect_type = #{capitalCollectType,jdbcType=TINYINT}
+            </if>
+            <if test="settleCircle != null">
+                AND settle_circle = #{settleCircle,jdbcType=SMALLINT}
+            </if>
+            <if test="lastSettleTime != null">
+                AND last_settle_time = #{lastSettleTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="availStatus != null">
+                AND avail_status = #{availStatus,jdbcType=TINYINT}
+            </if>
+            <if test="commissionSettlementSwitch != null">
+                AND commission_settlement_switch = #{commissionSettlementSwitch,jdbcType=TINYINT}
+            </if>
+            <if test="turnoverPoints != null">
+                AND turnover_points = #{turnoverPoints,jdbcType=BIGINT}
+            </if>
+            <if test="onlineCommission != null">
+                AND online_commission = #{onlineCommission,jdbcType=TINYINT}
+            </if>
+            <if test="commissionSettlementCircle != null">
+                AND commission_settlement_circle = #{commissionSettlementCircle,jdbcType=TINYINT}
+            </if>
+            <if test="commissionLastSettleTime != null">
+                AND commission_last_settle_time = #{commissionLastSettleTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+    <select id="selectSelective" resultMap="BaseResultMap" parameterType="com.hanyun.platform.settle.domain.SettleEntity">
+        SELECT 
+        <include refid="Base_Column_List"/>
+        FROM settle_entity
+        <where>
+            <if test="createTime != null">
+                AND create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null">
+                AND update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="entityId != null">
+                AND entity_id = #{entityId,jdbcType=VARCHAR}
+            </if>
+            <if test="entityName != null">
+                AND entity_name = #{entityName,jdbcType=VARCHAR}
+            </if>
+            <if test="entityType != null">
+                AND entity_type = #{entityType,jdbcType=TINYINT}
+            </if>
+            <if test="brandId != null">
+                AND brand_id = #{brandId,jdbcType=VARCHAR}
+            </if>
+            <if test="storeId != null">
+                AND store_id = #{storeId,jdbcType=VARCHAR}
+            </if>
+            <if test="separateSettle != null">
+                AND separate_settle = #{separateSettle,jdbcType=TINYINT}
+            </if>
+            <if test="capitalCollect != null">
+                AND capital_collect = #{capitalCollect,jdbcType=TINYINT}
+            </if>
+            <if test="capitalCollectType != null">
+                AND capital_collect_type = #{capitalCollectType,jdbcType=TINYINT}
+            </if>
+            <if test="settleCircle != null">
+                AND settle_circle = #{settleCircle,jdbcType=SMALLINT}
+            </if>
+            <if test="lastSettleTime != null">
+                AND last_settle_time = #{lastSettleTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="availStatus != null">
+                AND avail_status = #{availStatus,jdbcType=TINYINT}
+            </if>
+            <if test="commissionSettlementSwitch != null">
+                AND commission_settlement_switch = #{commissionSettlementSwitch,jdbcType=TINYINT}
+            </if>
+            <if test="turnoverPoints != null">
+                AND turnover_points = #{turnoverPoints,jdbcType=BIGINT}
+            </if>
+            <if test="onlineCommission != null">
+                AND online_commission = #{onlineCommission,jdbcType=TINYINT}
+            </if>
+            <if test="commissionSettlementCircle != null">
+                AND commission_settlement_circle = #{commissionSettlementCircle,jdbcType=TINYINT}
+            </if>
+            <if test="commissionLastSettleTime != null">
+                AND commission_last_settle_time = #{commissionLastSettleTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        DELETE FROM settle_entity
+        WHERE id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insertSelective" parameterType="com.hanyun.platform.settle.domain.SettleEntity">
+        INSERT INTO settle_entity
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="entityId != null">
+                entity_id,
+            </if>
+            <if test="entityName != null">
+                entity_name,
+            </if>
+            <if test="entityType != null">
+                entity_type,
+            </if>
+            <if test="brandId != null">
+                brand_id,
+            </if>
+            <if test="storeId != null">
+                store_id,
+            </if>
+            <if test="separateSettle != null">
+                separate_settle,
+            </if>
+            <if test="capitalCollect != null">
+                capital_collect,
+            </if>
+            <if test="capitalCollectType != null">
+                capital_collect_type,
+            </if>
+            <if test="settleCircle != null">
+                settle_circle,
+            </if>
+            <if test="lastSettleTime != null">
+                last_settle_time,
+            </if>
+            <if test="availStatus != null">
+                avail_status,
+            </if>
+            <if test="commissionSettlementSwitch != null">
+                commission_settlement_switch,
+            </if>
+            <if test="turnoverPoints != null">
+                turnover_points,
+            </if>
+            <if test="onlineCommission != null">
+                online_commission,
+            </if>
+            <if test="commissionSettlementCircle != null">
+                commission_settlement_circle,
+            </if>
+            <if test="commissionLastSettleTime != null">
+                commission_last_settle_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="entityId != null">
+                #{entityId,jdbcType=VARCHAR},
+            </if>
+            <if test="entityName != null">
+                #{entityName,jdbcType=VARCHAR},
+            </if>
+            <if test="entityType != null">
+                #{entityType,jdbcType=TINYINT},
+            </if>
+            <if test="brandId != null">
+                #{brandId,jdbcType=VARCHAR},
+            </if>
+            <if test="storeId != null">
+                #{storeId,jdbcType=VARCHAR},
+            </if>
+            <if test="separateSettle != null">
+                #{separateSettle,jdbcType=TINYINT},
+            </if>
+            <if test="capitalCollect != null">
+                #{capitalCollect,jdbcType=TINYINT},
+            </if>
+            <if test="capitalCollectType != null">
+                #{capitalCollectType,jdbcType=TINYINT},
+            </if>
+            <if test="settleCircle != null">
+                #{settleCircle,jdbcType=SMALLINT},
+            </if>
+            <if test="lastSettleTime != null">
+                #{lastSettleTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="availStatus != null">
+                #{availStatus,jdbcType=TINYINT},
+            </if>
+            <if test="commissionSettlementSwitch != null">
+                #{commissionSettlementSwitch,jdbcType=TINYINT},
+            </if>
+            <if test="turnoverPoints != null">
+                #{turnoverPoints,jdbcType=BIGINT},
+            </if>
+            <if test="onlineCommission != null">
+                #{onlineCommission,jdbcType=TINYINT},
+            </if>
+            <if test="commissionSettlementCircle != null">
+                #{commissionSettlementCircle,jdbcType=TINYINT},
+            </if>
+            <if test="commissionLastSettleTime != null">
+                #{commissionLastSettleTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hanyun.platform.settle.domain.SettleEntity">
+        UPDATE settle_entity
+        <set>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="entityId != null">
+                entity_id = #{entityId,jdbcType=VARCHAR},
+            </if>
+            <if test="entityName != null">
+                entity_name = #{entityName,jdbcType=VARCHAR},
+            </if>
+            <if test="entityType != null">
+                entity_type = #{entityType,jdbcType=TINYINT},
+            </if>
+            <if test="brandId != null">
+                brand_id = #{brandId,jdbcType=VARCHAR},
+            </if>
+            <if test="storeId != null">
+                store_id = #{storeId,jdbcType=VARCHAR},
+            </if>
+            <if test="separateSettle != null">
+                separate_settle = #{separateSettle,jdbcType=TINYINT},
+            </if>
+            <if test="capitalCollect != null">
+                capital_collect = #{capitalCollect,jdbcType=TINYINT},
+            </if>
+            <if test="capitalCollectType != null">
+                capital_collect_type = #{capitalCollectType,jdbcType=TINYINT},
+            </if>
+            <if test="settleCircle != null">
+                settle_circle = #{settleCircle,jdbcType=SMALLINT},
+            </if>
+            <if test="lastSettleTime != null">
+                last_settle_time = #{lastSettleTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="availStatus != null">
+                avail_status = #{availStatus,jdbcType=TINYINT},
+            </if>
+            <if test="commissionSettlementSwitch != null">
+               commission_settlement_switch = #{commissionSettlementSwitch,jdbcType=TINYINT},
+            </if>
+            <if test="turnoverPoints != null">
+               turnover_points = #{turnoverPoints,jdbcType=BIGINT},
+            </if>
+            <if test="onlineCommission != null">
+               online_commission = #{onlineCommission,jdbcType=TINYINT},
+            </if>
+            <if test="commissionSettlementCircle != null">
+               commission_settlement_circle = #{commissionSettlementCircle,jdbcType=TINYINT},
+            </if>
+            <if test="commissionLastSettleTime != null">
+               commission_last_settle_time = #{commissionLastSettleTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        WHERE id = #{id,jdbcType=BIGINT}
+    </update>
+    <select id="selectCanSettle" resultMap="BaseResultMap" parameterType="com.hanyun.platform.settle.vo.SettleEntityReq">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM settle_entity
+        <where>
+            <if test="createTime != null">
+                AND create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null">
+                AND update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="entityId != null">
+                AND entity_id = #{entityId,jdbcType=VARCHAR}
+            </if>
+            <if test="entityName != null">
+                AND entity_name = #{entityName,jdbcType=VARCHAR}
+            </if>
+            <if test="entityType != null">
+                AND entity_type = #{entityType,jdbcType=TINYINT}
+            </if>
+            <if test="brandId != null">
+                AND brand_id = #{brandId,jdbcType=VARCHAR}
+            </if>
+            <if test="storeId != null">
+                AND store_id = #{storeId,jdbcType=VARCHAR}
+            </if>
+            <if test="separateSettle != null">
+                AND separate_settle = #{separateSettle,jdbcType=TINYINT}
+            </if>
+            <if test="capitalCollect != null">
+                AND capital_collect = #{capitalCollect,jdbcType=TINYINT}
+            </if>
+            <if test="capitalCollectType != null">
+                AND capital_collect_type = #{capitalCollectType,jdbcType=TINYINT}
+            </if>
+            <if test="settleCircle != null">
+                AND settle_circle = #{settleCircle,jdbcType=SMALLINT}
+            </if>
+            <if test="lastSettleTime != null">
+                AND last_settle_time = #{lastSettleTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="availStatus != null">
+                AND avail_status = #{availStatus,jdbcType=TINYINT}
+            </if>
+        </where>
+    </select>
+    <update id="updateLastSettleTime" parameterType="com.hanyun.platform.settle.domain.SettleEntity">
+        UPDATE settle_entity
+        <set>
+            last_settle_time = #{lastSettleTime,jdbcType=TIMESTAMP},
+            update_time = now()
+        </set>
+        WHERE
+        brand_id = #{brandId,jdbcType=VARCHAR}
+        <if test="storeId != null and storeId != ''" >
+            AND store_id = #{storeId,jdbcType=VARCHAR}
+        </if>
+    </update>
+    <delete id="deleteBySettle" parameterType="java.lang.String">
+        DELETE FROM settle_entity
+        WHERE entity_id = #{entityId,jdbcType=VARCHAR}
+    </delete>
+
+    <update id="updateByEntityId" parameterType="com.hanyun.platform.settle.domain.SettleEntity">
+        UPDATE settle_entity
+        <set>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="entityName != null">
+                entity_name = #{entityName,jdbcType=VARCHAR},
+            </if>
+            <if test="entityType != null">
+                entity_type = #{entityType,jdbcType=TINYINT},
+            </if>
+            <if test="brandId != null">
+                brand_id = #{brandId,jdbcType=VARCHAR},
+            </if>
+            <if test="storeId != null">
+                store_id = #{storeId,jdbcType=VARCHAR},
+            </if>
+            <if test="separateSettle != null">
+                separate_settle = #{separateSettle,jdbcType=TINYINT},
+            </if>
+            <if test="capitalCollect != null">
+                capital_collect = #{capitalCollect,jdbcType=TINYINT},
+            </if>
+            <if test="capitalCollectType != null">
+                capital_collect_type = #{capitalCollectType,jdbcType=TINYINT},
+            </if>
+            <if test="settleCircle != null">
+                settle_circle = #{settleCircle,jdbcType=SMALLINT},
+            </if>
+            <if test="lastSettleTime != null">
+                last_settle_time = #{lastSettleTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="availStatus != null">
+                avail_status = #{availStatus,jdbcType=TINYINT},
+            </if>
+            <if test="commissionSettlementSwitch != null">
+                 commission_settlement_switch = #{commissionSettlementSwitch,jdbcType=TINYINT},
+            </if>
+            <if test="turnoverPoints != null">
+                 turnover_points = #{turnoverPoints,jdbcType=BIGINT},
+            </if>
+            <if test="onlineCommission != null">
+                 online_commission = #{onlineCommission,jdbcType=TINYINT},
+            </if>
+            <if test="commissionSettlementCircle != null">
+                 commission_settlement_circle = #{commissionSettlementCircle,jdbcType=TINYINT},
+            </if>
+            <if test="commissionLastSettleTime != null">
+                 commission_last_settle_time = #{commissionLastSettleTime,jdbcType=TIMESTAMP},
+            </if>
+
+        </set>
+        WHERE entity_id = #{entityId,jdbcType=VARCHAR}
+    </update>
+
+    <select id="selectCanSessionSettle" resultMap="BaseResultMap" parameterType="com.hanyun.platform.settle.vo.CommissionSettleEntityReq">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM settle_entity
+        <where>
+            <if test="entityType != null">
+                AND entity_type = #{entityType,jdbcType=TINYINT}
+            </if>
+            <if test="brandId != null">
+                AND brand_id = #{brandId,jdbcType=VARCHAR}
+            </if>
+            <if test="storeId != null">
+                AND store_id = #{storeId,jdbcType=VARCHAR}
+            </if>
+            <if test="availStatus != null">
+                AND avail_status = #{availStatus,jdbcType=TINYINT}
+            </if>
+            <if test="commissionSettlementSwitch != null">
+                AND commission_settlement_switch = #{commissionSettlementSwitch,jdbcType=TINYINT}
+            </if>
+            <if test="separateSettle != null">
+                AND separate_settle = #{separateSettle,jdbcType=TINYINT}
+            </if>
+        </where>
+    </select>
+
+    <update id="updateLastCommissionSettleTime" parameterType="com.hanyun.platform.settle.domain.SettleEntity">
+        UPDATE settle_entity
+        <set>
+            commission_last_settle_time = #{commissionLastSettleTime,jdbcType=TIMESTAMP},
+            update_time = now()
+        </set>
+        WHERE
+        brand_id = #{brandId,jdbcType=VARCHAR}
+        <if test="storeId != null and storeId != ''" >
+            AND store_id = #{storeId,jdbcType=VARCHAR}
+        </if>
+    </update>
+
+</mapper>

@@ -1,0 +1,12 @@
+target/
+.idea/
+
+*.bak
+*.iml
+*.versionsBackup
+.DS_Store
+.project
+.settings
+.classpath
+logs/
+/src/main/java/com/hanyun/platform/settle/web/A.java

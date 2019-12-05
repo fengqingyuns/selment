@@ -1,0 +1,1075 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--suppress ALL -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hanyun.platform.settle.dao.SettleBillDao">
+    <resultMap id="BaseResultMap" type="com.hanyun.platform.settle.domain.SettleBill">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="bill_id" property="billId" jdbcType="VARCHAR"/>
+        <result column="entity_id" property="entityId" jdbcType="VARCHAR"/>
+        <result column="entity_type" property="entityType" jdbcType="TINYINT"/>
+        <result column="brand_id" property="brandId" jdbcType="VARCHAR"/>
+        <result column="store_id" property="storeId" jdbcType="VARCHAR"/>
+        <result column="separate_settle" property="separateSettle" jdbcType="TINYINT"/>
+        <result column="capital_collect" property="capitalCollect" jdbcType="TINYINT"/>
+        <result column="capital_collect_type" property="capitalCollectType" jdbcType="TINYINT"/>
+        <result column="settle_circle" property="settleCircle" jdbcType="SMALLINT"/>
+        <result column="trade_date_start" property="tradeDateStart" jdbcType="DATE"/>
+        <result column="trade_date_end" property="tradeDateEnd" jdbcType="DATE"/>
+        <result column="settle_date" property="settleDate" jdbcType="DATE"/>
+        <result column="settle_status" property="settleStatus" jdbcType="SMALLINT"/>
+        <result column="audit_status" property="auditStatus" jdbcType="SMALLINT"/>
+        <result column="total_flow_amt" property="totalFlowAmt" jdbcType="BIGINT"/>
+        <result column="online_flow_amt" property="onlineFlowAmt" jdbcType="BIGINT"/>
+        <result column="pay_fee" property="payFee" jdbcType="BIGINT"/>
+        <result column="entity_shalt_rec_amt" property="entityShaltRecAmt" jdbcType="BIGINT"/>
+        <result column="entity_actual_rec_amt" property="entityActualRecAmt" jdbcType="BIGINT"/>
+        <result column="bank_collect_amt" property="bankCollectAmt" jdbcType="BIGINT"/>
+        <result column="platform_actual_rec_amt" property="platformActualRecAmt" jdbcType="BIGINT"/>
+        <result column="platform_share_rate" property="platformShareRate" jdbcType="BIGINT"/>
+        <result column="platform_share_amt" property="platformShareAmt" jdbcType="BIGINT"/>
+        <result column="brand_share_rate" property="brandShareRate" jdbcType="BIGINT"/>
+        <result column="brand_share_amt" property="brandShareAmt" jdbcType="BIGINT"/>
+        <result column="entity_divide_amt" property="entityDivideAmt" jdbcType="BIGINT"/>
+        <result column="diff_resolve_cnt" property="diffResolveCnt" jdbcType="INTEGER"/>
+        <result column="diff_resolve_amt" property="diffResolveAmt" jdbcType="BIGINT"/>
+        <result column="diff_resolve_pay_fee" property="diffResolvePayFee" jdbcType="BIGINT"/>
+        <result column="diff_resolve_actual_amt" property="diffResolveActualAmt" jdbcType="BIGINT"/>
+        <result column="diff_submit_cnt" property="diffSubmitCnt" jdbcType="INTEGER"/>
+        <result column="diff_submit_amt" property="diffSubmitAmt" jdbcType="BIGINT"/>
+        <result column="diff_submit_pay_fee" property="diffSubmitPayFee" jdbcType="BIGINT"/>
+        <result column="diff_submit_actual_amt" property="diffSubmitActualAmt" jdbcType="BIGINT"/>
+        <result column="diff_total_amt" property="diffTotalAmt" jdbcType="BIGINT"/>
+        <result column="settle_amt" property="settleAmt" jdbcType="BIGINT"/>
+        <result column="turnover_points" property="turnoverPoints" jdbcType="BIGINT"/>
+        <result column="today_commission" property="todayCommission" jdbcType="BIGINT"/>
+        <result column="commission_deduction" property="commissionDeduction" jdbcType="BIGINT"/>
+        <result column="brand_flow_amt" property="brandFlowAmt" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, create_time, update_time, bill_id, entity_id, entity_type, brand_id, store_id, separate_settle, capital_collect, capital_collect_type, settle_circle, trade_date_start, trade_date_end, settle_date, 
+        settle_status, audit_status, total_flow_amt, online_flow_amt, pay_fee, entity_shalt_rec_amt, entity_actual_rec_amt, bank_collect_amt, platform_actual_rec_amt, platform_share_rate, platform_share_amt,
+        brand_share_rate, brand_share_amt, entity_divide_amt, diff_resolve_cnt, diff_resolve_amt, diff_resolve_pay_fee, diff_resolve_actual_amt, diff_submit_cnt, diff_submit_amt, diff_submit_pay_fee, diff_submit_actual_amt, 
+        diff_total_amt, settle_amt,turnover_points, today_commission, commission_deduction, brand_flow_amt
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        SELECT 
+        <include refid="Base_Column_List"/>
+        FROM settle_bill
+        WHERE id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="selectSelective" resultMap="BaseResultMap" parameterType="com.hanyun.platform.settle.domain.SettleBill">
+        SELECT 
+        <include refid="Base_Column_List"/>
+        FROM settle_bill
+        <where>
+            <if test="createTime != null">
+                AND create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null">
+                AND update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="billId != null">
+                AND bill_id = #{billId,jdbcType=VARCHAR}
+            </if>
+            <if test="entityId != null">
+                AND entity_id = #{entityId,jdbcType=VARCHAR}
+            </if>
+            <if test="entityType != null">
+                AND entity_type = #{entityType,jdbcType=TINYINT}
+            </if>
+            <if test="brandId != null">
+                AND brand_id = #{brandId,jdbcType=VARCHAR}
+            </if>
+            <if test="storeId != null">
+                AND store_id = #{storeId,jdbcType=VARCHAR}
+            </if>
+            <if test="separateSettle != null">
+                AND separate_settle = #{separateSettle,jdbcType=TINYINT}
+            </if>
+            <if test="capitalCollect != null">
+                AND capital_collect = #{capitalCollect,jdbcType=TINYINT}
+            </if>
+            <if test="capitalCollectType != null">
+                AND capital_collect_type = #{capitalCollectType,jdbcType=TINYINT}
+            </if>
+            <if test="settleCircle != null">
+                AND settle_circle = #{settleCircle,jdbcType=SMALLINT}
+            </if>
+            <if test="tradeDateStart != null">
+                AND trade_date_start = #{tradeDateStart,jdbcType=DATE}
+            </if>
+            <if test="tradeDateEnd != null">
+                AND trade_date_end = #{tradeDateEnd,jdbcType=DATE}
+            </if>
+            <if test="settleDate != null">
+                AND settle_date = #{settleDate,jdbcType=DATE}
+            </if>
+            <if test="settleStatus != null">
+                AND settle_status = #{settleStatus,jdbcType=SMALLINT}
+            </if>
+            <if test="auditStatus != null">
+                AND audit_status = #{auditStatus,jdbcType=SMALLINT}
+            </if>
+            <if test="totalFlowAmt != null">
+                AND total_flow_amt = #{totalFlowAmt,jdbcType=BIGINT}
+            </if>
+            <if test="onlineFlowAmt != null">
+                AND online_flow_amt = #{onlineFlowAmt,jdbcType=BIGINT}
+            </if>
+            <if test="payFee != null">
+                AND pay_fee = #{payFee,jdbcType=BIGINT}
+            </if>
+            <if test="entityShaltRecAmt != null">
+                AND entity_shalt_rec_amt = #{entityShaltRecAmt,jdbcType=BIGINT}
+            </if>
+            <if test="entityActualRecAmt != null">
+                AND entity_actual_rec_amt = #{entityActualRecAmt,jdbcType=BIGINT}
+            </if>
+            <if test="bankCollectAmt != null">
+                AND bank_collect_amt = #{bankCollectAmt,jdbcType=BIGINT}
+            </if>
+            <if test="platformActualRecAmt != null">
+                AND platform_actual_rec_amt = #{platformActualRecAmt,jdbcType=BIGINT}
+            </if>
+            <if test="platformShareRate != null">
+                AND platform_share_rate = #{platformShareRate,jdbcType=BIGINT}
+            </if>
+            <if test="platformShareAmt != null">
+                AND platform_share_amt = #{platformShareAmt,jdbcType=BIGINT}
+            </if>
+            <if test="brandShareRate != null">
+                AND brand_share_rate = #{brandShareRate,jdbcType=BIGINT}
+            </if>
+            <if test="brandShareAmt != null">
+                AND brand_share_amt = #{brandShareAmt,jdbcType=BIGINT}
+            </if>
+            <if test="entityDivideAmt != null">
+                AND entity_divide_amt = #{entityDivideAmt,jdbcType=BIGINT}
+            </if>
+            <if test="diffResolveCnt != null">
+                AND diff_resolve_cnt = #{diffResolveCnt,jdbcType=INTEGER}
+            </if>
+            <if test="diffResolveAmt != null">
+                AND diff_resolve_amt = #{diffResolveAmt,jdbcType=BIGINT}
+            </if>
+            <if test="diffResolvePayFee != null">
+                AND diff_resolve_pay_fee = #{diffResolvePayFee,jdbcType=BIGINT}
+            </if>
+            <if test="diffResolveActualAmt != null">
+                AND diff_resolve_actual_amt = #{diffResolveActualAmt,jdbcType=BIGINT}
+            </if>
+            <if test="diffSubmitCnt != null">
+                AND diff_submit_cnt = #{diffSubmitCnt,jdbcType=INTEGER}
+            </if>
+            <if test="diffSubmitAmt != null">
+                AND diff_submit_amt = #{diffSubmitAmt,jdbcType=BIGINT}
+            </if>
+            <if test="diffSubmitPayFee != null">
+                AND diff_submit_pay_fee = #{diffSubmitPayFee,jdbcType=BIGINT}
+            </if>
+            <if test="diffSubmitActualAmt != null">
+                AND diff_submit_actual_amt = #{diffSubmitActualAmt,jdbcType=BIGINT}
+            </if>
+            <if test="diffTotalAmt != null">
+                AND diff_total_amt = #{diffTotalAmt,jdbcType=BIGINT}
+            </if>
+            <if test="settleAmt != null">
+                AND settle_amt = #{settleAmt,jdbcType=BIGINT}
+            </if>
+            <if test="turnoverPoints != null">
+                AND turnover_points = #{turnoverPoints,jdbcType=BIGINT}
+            </if>
+            <if test="todayCommission != null">
+                AND today_commission = #{todayCommission,jdbcType=BIGINT}
+            </if>
+            <if test="commissionDeduction != null">
+                AND commission_deduction = #{commissionDeduction,jdbcType=BIGINT}
+            </if>
+            <if test="brandFlowAmt != null">
+                AND brand_flow_amt = #{brandFlowAmt,jdbcType=BIGINT}
+            </if>
+        </where>
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        DELETE FROM settle_bill
+        WHERE id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insertSelective" parameterType="com.hanyun.platform.settle.domain.SettleBill">
+        INSERT INTO settle_bill
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="billId != null">
+                bill_id,
+            </if>
+            <if test="entityId != null">
+                entity_id,
+            </if>
+            <if test="entityType != null">
+                entity_type,
+            </if>
+            <if test="brandId != null">
+                brand_id,
+            </if>
+            <if test="storeId != null">
+                store_id,
+            </if>
+            <if test="separateSettle != null">
+                separate_settle,
+            </if>
+            <if test="capitalCollect != null">
+                capital_collect,
+            </if>
+            <if test="capitalCollectType != null">
+                capital_collect_type,
+            </if>
+            <if test="settleCircle != null">
+                settle_circle,
+            </if>
+            <if test="tradeDateStart != null">
+                trade_date_start,
+            </if>
+            <if test="tradeDateEnd != null">
+                trade_date_end,
+            </if>
+            <if test="settleDate != null">
+                settle_date,
+            </if>
+            <if test="settleStatus != null">
+                settle_status,
+            </if>
+            <if test="auditStatus != null">
+                audit_status,
+            </if>
+            <if test="totalFlowAmt != null">
+                total_flow_amt,
+            </if>
+            <if test="onlineFlowAmt != null">
+                online_flow_amt,
+            </if>
+            <if test="payFee != null">
+                pay_fee,
+            </if>
+            <if test="entityShaltRecAmt != null">
+                entity_shalt_rec_amt,
+            </if>
+            <if test="entityActualRecAmt != null">
+                entity_actual_rec_amt,
+            </if>
+            <if test="bankCollectAmt != null">
+                bank_collect_amt,
+            </if>
+            <if test="platformActualRecAmt != null">
+                platform_actual_rec_amt,
+            </if>
+            <if test="platformShareRate != null">
+                platform_share_rate,
+            </if>
+            <if test="platformShareAmt != null">
+                platform_share_amt,
+            </if>
+            <if test="brandShareRate != null">
+                brand_share_rate,
+            </if>
+            <if test="brandShareAmt != null">
+                brand_share_amt,
+            </if>
+            <if test="entityDivideAmt != null">
+                entity_divide_amt,
+            </if>
+            <if test="diffResolveCnt != null">
+                diff_resolve_cnt,
+            </if>
+            <if test="diffResolveAmt != null">
+                diff_resolve_amt,
+            </if>
+            <if test="diffResolvePayFee != null">
+                diff_resolve_pay_fee,
+            </if>
+            <if test="diffResolveActualAmt != null">
+                diff_resolve_actual_amt,
+            </if>
+            <if test="diffSubmitCnt != null">
+                diff_submit_cnt,
+            </if>
+            <if test="diffSubmitAmt != null">
+                diff_submit_amt,
+            </if>
+            <if test="diffSubmitPayFee != null">
+                diff_submit_pay_fee,
+            </if>
+            <if test="diffSubmitActualAmt != null">
+                diff_submit_actual_amt,
+            </if>
+            <if test="diffTotalAmt != null">
+                diff_total_amt,
+            </if>
+            <if test="settleAmt != null">
+                settle_amt,
+            </if>
+            <if test="turnoverPoints != null">
+                turnover_points,
+            </if>
+            <if test="todayCommission != null">
+                today_commission,
+            </if>
+            <if test="commissionDeduction != null">
+                commission_deduction,
+            </if>
+            <if test="brandFlowAmt != null">
+                brand_flow_amt,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="billId != null">
+                #{billId,jdbcType=VARCHAR},
+            </if>
+            <if test="entityId != null">
+                #{entityId,jdbcType=VARCHAR},
+            </if>
+            <if test="entityType != null">
+                #{entityType,jdbcType=TINYINT},
+            </if>
+            <if test="brandId != null">
+                #{brandId,jdbcType=VARCHAR},
+            </if>
+            <if test="storeId != null">
+                #{storeId,jdbcType=VARCHAR},
+            </if>
+            <if test="separateSettle != null">
+                #{separateSettle,jdbcType=TINYINT},
+            </if>
+            <if test="capitalCollect != null">
+                #{capitalCollect,jdbcType=TINYINT},
+            </if>
+            <if test="capitalCollectType != null">
+                #{capitalCollectType,jdbcType=TINYINT},
+            </if>
+            <if test="settleCircle != null">
+                #{settleCircle,jdbcType=SMALLINT},
+            </if>
+            <if test="tradeDateStart != null">
+                #{tradeDateStart,jdbcType=DATE},
+            </if>
+            <if test="tradeDateEnd != null">
+                #{tradeDateEnd,jdbcType=DATE},
+            </if>
+            <if test="settleDate != null">
+                #{settleDate,jdbcType=DATE},
+            </if>
+            <if test="settleStatus != null">
+                #{settleStatus,jdbcType=SMALLINT},
+            </if>
+            <if test="auditStatus != null">
+                #{auditStatus,jdbcType=SMALLINT},
+            </if>
+            <if test="totalFlowAmt != null">
+                #{totalFlowAmt,jdbcType=BIGINT},
+            </if>
+            <if test="onlineFlowAmt != null">
+                #{onlineFlowAmt,jdbcType=BIGINT},
+            </if>
+            <if test="payFee != null">
+                #{payFee,jdbcType=BIGINT},
+            </if>
+            <if test="entityShaltRecAmt != null">
+                #{entityShaltRecAmt,jdbcType=BIGINT},
+            </if>
+            <if test="entityActualRecAmt != null">
+                #{entityActualRecAmt,jdbcType=BIGINT},
+            </if>
+            <if test="bankCollectAmt != null">
+                #{bankCollectAmt,jdbcType=BIGINT},
+            </if>
+            <if test="platformActualRecAmt != null">
+                #{platformActualRecAmt,jdbcType=BIGINT},
+            </if>
+            <if test="platformShareRate != null">
+                #{platformShareRate,jdbcType=BIGINT},
+            </if>
+            <if test="platformShareAmt != null">
+                #{platformShareAmt,jdbcType=BIGINT},
+            </if>
+            <if test="brandShareRate != null">
+                #{brandShareRate,jdbcType=BIGINT},
+            </if>
+            <if test="brandShareAmt != null">
+                #{brandShareAmt,jdbcType=BIGINT},
+            </if>
+            <if test="entityDivideAmt != null">
+                #{entityDivideAmt,jdbcType=BIGINT},
+            </if>
+            <if test="diffResolveCnt != null">
+                #{diffResolveCnt,jdbcType=INTEGER},
+            </if>
+            <if test="diffResolveAmt != null">
+                #{diffResolveAmt,jdbcType=BIGINT},
+            </if>
+            <if test="diffResolvePayFee != null">
+                #{diffResolvePayFee,jdbcType=BIGINT},
+            </if>
+            <if test="diffResolveActualAmt != null">
+                #{diffResolveActualAmt,jdbcType=BIGINT},
+            </if>
+            <if test="diffSubmitCnt != null">
+                #{diffSubmitCnt,jdbcType=INTEGER},
+            </if>
+            <if test="diffSubmitAmt != null">
+                #{diffSubmitAmt,jdbcType=BIGINT},
+            </if>
+            <if test="diffSubmitPayFee != null">
+                #{diffSubmitPayFee,jdbcType=BIGINT},
+            </if>
+            <if test="diffSubmitActualAmt != null">
+                #{diffSubmitActualAmt,jdbcType=BIGINT},
+            </if>
+            <if test="diffTotalAmt != null">
+                #{diffTotalAmt,jdbcType=BIGINT},
+            </if>
+            <if test="settleAmt != null">
+                #{settleAmt,jdbcType=BIGINT},
+            </if>
+            <if test="turnoverPoints != null">
+                #{turnoverPoints,jdbcType=BIGINT},
+            </if>
+            <if test="todayCommission != null">
+                #{todayCommission,jdbcType=BIGINT},
+            </if>
+            <if test="commissionDeduction != null">
+                #{commissionDeduction,jdbcType=BIGINT},
+            </if>
+            <if test="brandFlowAmt != null">
+                #{brandFlowAmt,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hanyun.platform.settle.domain.SettleBill">
+        UPDATE settle_bill
+        <set>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="billId != null">
+                bill_id = #{billId,jdbcType=VARCHAR},
+            </if>
+            <if test="entityId != null">
+                entity_id = #{entityId,jdbcType=VARCHAR},
+            </if>
+            <if test="entityType != null">
+                entity_type = #{entityType,jdbcType=TINYINT},
+            </if>
+            <if test="brandId != null">
+                brand_id = #{brandId,jdbcType=VARCHAR},
+            </if>
+            <if test="storeId != null">
+                store_id = #{storeId,jdbcType=VARCHAR},
+            </if>
+            <if test="separateSettle != null">
+                separate_settle = #{separateSettle,jdbcType=TINYINT},
+            </if>
+            <if test="capitalCollect != null">
+                capital_collect = #{capitalCollect,jdbcType=TINYINT},
+            </if>
+            <if test="capitalCollectType != null">
+                capital_collect_type = #{capitalCollectType,jdbcType=TINYINT},
+            </if>
+            <if test="settleCircle != null">
+                settle_circle = #{settleCircle,jdbcType=SMALLINT},
+            </if>
+            <if test="tradeDateStart != null">
+                trade_date_start = #{tradeDateStart,jdbcType=DATE},
+            </if>
+            <if test="tradeDateEnd != null">
+                trade_date_end = #{tradeDateEnd,jdbcType=DATE},
+            </if>
+            <if test="settleDate != null">
+                settle_date = #{settleDate,jdbcType=DATE},
+            </if>
+            <if test="settleStatus != null">
+                settle_status = #{settleStatus,jdbcType=SMALLINT},
+            </if>
+            <if test="auditStatus != null">
+                audit_status = #{auditStatus,jdbcType=SMALLINT},
+            </if>
+            <if test="totalFlowAmt != null">
+                total_flow_amt = #{totalFlowAmt,jdbcType=BIGINT},
+            </if>
+            <if test="onlineFlowAmt != null">
+                online_flow_amt = #{onlineFlowAmt,jdbcType=BIGINT},
+            </if>
+            <if test="payFee != null">
+                pay_fee = #{payFee,jdbcType=BIGINT},
+            </if>
+            <if test="entityShaltRecAmt != null">
+                entity_shalt_rec_amt = #{entityShaltRecAmt,jdbcType=BIGINT},
+            </if>
+            <if test="entityActualRecAmt != null">
+                entity_actual_rec_amt = #{entityActualRecAmt,jdbcType=BIGINT},
+            </if>
+            <if test="bankCollectAmt != null">
+                bank_collect_amt = #{bankCollectAmt,jdbcType=BIGINT},
+            </if>
+            <if test="platformActualRecAmt != null">
+                platform_actual_rec_amt = #{platformActualRecAmt,jdbcType=BIGINT},
+            </if>
+            <if test="platformShareRate != null">
+                platform_share_rate = #{platformShareRate,jdbcType=BIGINT},
+            </if>
+            <if test="platformShareAmt != null">
+                platform_share_amt = #{platformShareAmt,jdbcType=BIGINT},
+            </if>
+            <if test="brandShareRate != null">
+                brand_share_rate = #{brandShareRate,jdbcType=BIGINT},
+            </if>
+            <if test="brandShareAmt != null">
+                brand_share_amt = #{brandShareAmt,jdbcType=BIGINT},
+            </if>
+            <if test="entityDivideAmt != null">
+                entity_divide_amt = #{entityDivideAmt,jdbcType=BIGINT},
+            </if>
+            <if test="diffResolveCnt != null">
+                diff_resolve_cnt = #{diffResolveCnt,jdbcType=INTEGER},
+            </if>
+            <if test="diffResolveAmt != null">
+                diff_resolve_amt = #{diffResolveAmt,jdbcType=BIGINT},
+            </if>
+            <if test="diffResolvePayFee != null">
+                diff_resolve_pay_fee = #{diffResolvePayFee,jdbcType=BIGINT},
+            </if>
+            <if test="diffResolveActualAmt != null">
+                diff_resolve_actual_amt = #{diffResolveActualAmt,jdbcType=BIGINT},
+            </if>
+            <if test="diffSubmitCnt != null">
+                diff_submit_cnt = #{diffSubmitCnt,jdbcType=INTEGER},
+            </if>
+            <if test="diffSubmitAmt != null">
+                diff_submit_amt = #{diffSubmitAmt,jdbcType=BIGINT},
+            </if>
+            <if test="diffSubmitPayFee != null">
+                diff_submit_pay_fee = #{diffSubmitPayFee,jdbcType=BIGINT},
+            </if>
+            <if test="diffSubmitActualAmt != null">
+                diff_submit_actual_amt = #{diffSubmitActualAmt,jdbcType=BIGINT},
+            </if>
+            <if test="diffTotalAmt != null">
+                diff_total_amt = #{diffTotalAmt,jdbcType=BIGINT},
+            </if>
+            <if test="settleAmt != null">
+                settle_amt = #{settleAmt,jdbcType=BIGINT},
+            </if>
+            <if test="turnoverPoints != null">
+                turnover_points = #{turnoverPoints,jdbcType=BIGINT},
+            </if>
+            <if test="todayCommission != null">
+                today_commission = #{todayCommission,jdbcType=BIGINT},
+            </if>
+            <if test="commissionDeduction != null">
+                commission_deduction = #{commissionDeduction,jdbcType=BIGINT},
+            </if>
+            <if test="brandFlowAmt != null">
+                brand_flow_amt = #{brandFlowAmt,jdbcType=BIGINT},
+            </if>
+        </set>
+        WHERE id = #{id,jdbcType=BIGINT}
+    </update>
+
+
+    <select resultMap="BaseResultMap" id="getSettleBillList">
+        SELECT
+            <include refid="Base_Column_List"/>
+        FROM
+          settle_bill
+        <where>
+            <if test="brandId != null">
+                AND brand_id = #{brandId,jdbcType=VARCHAR}
+            </if>
+            <if test="storeId != null">
+                AND store_id = #{storeId,jdbcType=VARCHAR}
+            </if>
+            <if test="settleStatus != null">
+                AND settle_status = #{settleStatus,jdbcType=SMALLINT}
+            </if>
+            <if test="beginTime != null">
+                and trade_date_start <![CDATA[>=]]> #{beginTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime != null">
+                and trade_date_start <![CDATA[<=]]> #{endTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="entityType != null">
+                AND entity_type = #{entityType,jdbcType=TINYINT}
+            </if>
+        </where>
+        order by trade_date_start desc,id DESC
+        LIMIT #{beginIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+    </select>
+
+
+    <select id="getSettleBillListCount" resultType="java.lang.Integer">
+        SELECT
+          count(1)
+        FROM
+        settle_bill
+        <where>
+            <if test="brandId != null">
+                AND brand_id = #{brandId,jdbcType=VARCHAR}
+            </if>
+            <if test="storeId != null">
+                AND store_id = #{storeId,jdbcType=VARCHAR}
+            </if>
+            <if test="settleStatus != null">
+                AND settle_status = #{settleStatus,jdbcType=SMALLINT}
+            </if>
+            <if test="beginTime != null">
+                and trade_date_start <![CDATA[>=]]> #{beginTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime != null">
+                and trade_date_start <![CDATA[<=]]> #{endTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+
+    </select>
+
+    <select id="getSingleSettleBill" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        settle_bill
+        <where>
+            <if test="brandId != null">
+                AND brand_id = #{brandId,jdbcType=VARCHAR}
+            </if>
+            <if test="storeId != null">
+                AND store_id = #{storeId,jdbcType=VARCHAR}
+            </if>
+            <if test="billId != null">
+                AND bill_id = #{billId,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <!--结算单详情中门店分账-->
+    <select resultMap="BaseResultMap" id="getSettleBillDetailList">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        settle_bill
+        <where>
+            <if test="brandId != null">
+                AND brand_id = #{brandId,jdbcType=VARCHAR}
+            </if>
+            <if test="storeId != null">
+                AND store_id = #{storeId,jdbcType=VARCHAR}
+            </if>
+            <if test="entityType != null">
+                AND entity_type = #{entityType,jdbcType=TINYINT}
+            </if>
+            <if test="beginTime != null">
+                AND trade_date_start <![CDATA[>=]]>  #{beginTime,jdbcType=TIMESTAMP}
+                AND trade_date_start <![CDATA[<=]]>  #{endTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+        order by store_id desc
+    </select>
+
+    <select id="getBrandDivideAmt" resultType="java.lang.Long" parameterType="com.hanyun.platform.settle.domain.SettleBill">
+        SELECT
+        sum(entity_divide_amt)
+        FROM
+        settle_bill
+        <where>
+            brand_id = #{brandId,jdbcType=VARCHAR}
+            AND settle_date = #{settleDate,jdbcType=DATE}
+            AND entity_type = 2
+        </where>
+    </select>
+
+    <select id="sumSettleBill" resultMap="BaseResultMap">
+        SELECT
+            SUM(total_flow_amt) total_flow_amt,
+            SUM(online_flow_amt) online_flow_amt,
+            SUM(pay_fee) pay_fee,
+            SUM(entity_actual_rec_amt) entity_actual_rec_amt,
+            SUM(diff_total_amt) diff_total_amt,
+            SUM(entity_divide_amt) entity_divide_amt,
+            SUM(today_commission) today_commission,
+            SUM(commission_deduction) commission_deduction
+          FROM
+            settle_bill
+        <where>
+            <if test="brandId != null">
+                AND brand_id = #{brandId,jdbcType=VARCHAR}
+            </if>
+            <if test="storeId != null">
+                AND store_id = #{storeId,jdbcType=VARCHAR}
+            </if>
+            <if test="entityType != null">
+                AND entity_type = #{entityType,jdbcType=TINYINT}
+            </if>
+            <if test="beginTime != null">
+                AND trade_date_start <![CDATA[>=]]>  #{beginTime,jdbcType=TIMESTAMP}
+                AND trade_date_start <![CDATA[<=]]>  #{endTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+
+    <update id="updateSettleBySettleId" parameterType="com.hanyun.platform.settle.domain.SettleBill">
+        UPDATE settle_bill
+        <set>
+            update_time = now(),
+            <if test="settleStatus != null">
+                settle_status = #{settleStatus,jdbcType=SMALLINT},
+            </if>
+            <if test="auditStatus != null">
+                audit_status = #{auditStatus,jdbcType=SMALLINT},
+            </if>
+            <if test="totalFlowAmt != null">
+                total_flow_amt = #{totalFlowAmt,jdbcType=BIGINT},
+            </if>
+            <if test="onlineFlowAmt != null">
+                online_flow_amt = #{onlineFlowAmt,jdbcType=BIGINT},
+            </if>
+            <if test="payFee != null">
+                pay_fee = #{payFee,jdbcType=BIGINT},
+            </if>
+            <if test="entityShaltRecAmt != null">
+                entity_shalt_rec_amt = #{entityShaltRecAmt,jdbcType=BIGINT},
+            </if>
+            <if test="entityActualRecAmt != null">
+                entity_actual_rec_amt = #{entityActualRecAmt,jdbcType=BIGINT},
+            </if>
+            <if test="bankCollectAmt != null">
+                bank_collect_amt = #{bankCollectAmt,jdbcType=BIGINT},
+            </if>
+            <if test="platformActualRecAmt != null">
+                platform_actual_rec_amt = #{platformActualRecAmt,jdbcType=BIGINT},
+            </if>
+            <if test="platformShareRate != null">
+                platform_share_rate = #{platformShareRate,jdbcType=BIGINT},
+            </if>
+            <if test="platformShareAmt != null">
+                platform_share_amt = #{platformShareAmt,jdbcType=BIGINT},
+            </if>
+            <if test="brandShareRate != null">
+                brand_share_rate = #{brandShareRate,jdbcType=BIGINT},
+            </if>
+            <if test="brandShareAmt != null">
+                brand_share_amt = #{brandShareAmt,jdbcType=BIGINT},
+            </if>
+            <if test="entityDivideAmt != null">
+                entity_divide_amt = #{entityDivideAmt,jdbcType=BIGINT},
+            </if>
+            <if test="diffResolveCnt != null">
+                diff_resolve_cnt = #{diffResolveCnt,jdbcType=INTEGER},
+            </if>
+            <if test="diffResolveAmt != null">
+                diff_resolve_amt = #{diffResolveAmt,jdbcType=BIGINT},
+            </if>
+            <if test="diffResolvePayFee != null">
+                diff_resolve_pay_fee = #{diffResolvePayFee,jdbcType=BIGINT},
+            </if>
+            <if test="diffResolveActualAmt != null">
+                diff_resolve_actual_amt = #{diffResolveActualAmt,jdbcType=BIGINT},
+            </if>
+            <if test="diffSubmitCnt != null">
+                diff_submit_cnt = #{diffSubmitCnt,jdbcType=INTEGER},
+            </if>
+            <if test="diffSubmitAmt != null">
+                diff_submit_amt = #{diffSubmitAmt,jdbcType=BIGINT},
+            </if>
+            <if test="diffSubmitPayFee != null">
+                diff_submit_pay_fee = #{diffSubmitPayFee,jdbcType=BIGINT},
+            </if>
+            <if test="diffSubmitActualAmt != null">
+                diff_submit_actual_amt = #{diffSubmitActualAmt,jdbcType=BIGINT},
+            </if>
+            <if test="diffTotalAmt != null">
+                diff_total_amt = #{diffTotalAmt,jdbcType=BIGINT},
+            </if>
+            <if test="settleAmt != null">
+                settle_amt = #{settleAmt,jdbcType=BIGINT},
+            </if>
+            <if test="turnoverPoints != null">
+                turnover_points = #{turnoverPoints,jdbcType=BIGINT},
+            </if>
+            <if test="todayCommission != null">
+                today_commission = #{todayCommission,jdbcType=BIGINT},
+            </if>
+            <if test="commissionDeduction != null">
+                commission_deduction = #{commissionDeduction,jdbcType=BIGINT},
+            </if>
+            <if test="brandFlowAmt != null">
+                brand_flow_amt = #{brandFlowAmt,jdbcType=BIGINT},
+            </if>
+        </set>
+        WHERE bill_id = #{billId,jdbcType=VARCHAR}
+    </update>
+
+    <select id="getSettleBillByParameter" resultMap="BaseResultMap" parameterType="com.hanyun.platform.settle.domain.SettleBill">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        settle_bill
+        <where>
+            brand_id = #{brandId,jdbcType=VARCHAR}
+            AND trade_date_start = #{tradeDateStart,jdbcType=DATE}
+            AND entity_type = #{entityType,jdbcType=TINYINT}
+            <if test="storeId != null and storeId !=''">
+                AND store_id = #{storeId,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+    <update id="updateSettleBill" parameterType="com.hanyun.platform.settle.domain.SettleBill">
+        UPDATE settle_bill
+        <set>
+                update_time = NOW(),
+            <if test="settleStatus != null">
+                settle_status = #{settleStatus,jdbcType=SMALLINT},
+            </if>
+            <if test="auditStatus != null">
+                audit_status = #{auditStatus,jdbcType=SMALLINT},
+            </if>
+        </set>
+        <where>
+            <if test="billId != null">
+                AND bill_id = #{billId,jdbcType=VARCHAR}
+            </if>
+            <if test="brandId != null">
+                AND brand_id = #{brandId,jdbcType=VARCHAR}
+            </if>
+            <if test="storeId != null">
+                AND store_id = #{storeId,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </update>
+
+    <select id="getSummarySettleBill" resultMap="BaseResultMap" parameterType="com.hanyun.platform.settle.vo.settlebill.SettleBillListReq">
+        SELECT
+            brand_id,store_id, SUM(total_flow_amt) AS total_flow_amt, SUM(online_flow_amt) AS online_flow_amt, SUM(pay_fee) AS pay_fee, SUM(platform_actual_rec_amt) AS platform_actual_rec_amt,
+        SUM(diff_submit_cnt) AS diff_submit_cnt,  SUM(diff_total_amt) AS diff_total_amt, SUM(settle_amt) AS settle_amt
+        FROM
+        settle_bill
+        <where>
+            brand_id = #{brandId,jdbcType=VARCHAR}
+            <if test="storeId != null and storeId !=''">
+                AND store_id = #{storeId,jdbcType=VARCHAR}
+            </if>
+            <if test="storeId == null">
+                AND store_id is null
+            </if>
+            <if test="beginTime != null">
+                and trade_date_start <![CDATA[>=]]> #{beginTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime != null">
+                and trade_date_start <![CDATA[<=]]> #{endTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+
+    <select id="getCommissionInfo" resultMap="BaseResultMap" parameterType="com.hanyun.platform.settle.vo.commissionbill.QueryCommissionPara" >
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+             settle_bill
+        <where>
+            <if test="brandId != null">
+                AND brand_id = #{brandId,jdbcType=VARCHAR}
+            </if>
+            <if test="storeId != null">
+                AND store_id = #{storeId,jdbcType=VARCHAR}
+            </if>
+            <if test="entityType != null">
+                AND entity_type = #{entityType,jdbcType=SMALLINT}
+            </if>
+            <if test="beginTime != null">
+                and trade_date_start <![CDATA[>=]]> #{beginTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime != null">
+                and trade_date_end <![CDATA[<=]]> #{endTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+        order by trade_date_start DESC
+        LIMIT #{beginIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+    </select>
+
+    <select id="getCommissionInfoCount" resultType="java.lang.Integer" parameterType="com.hanyun.platform.settle.vo.commissionbill.QueryCommissionPara" >
+        SELECT
+          count(1)
+        FROM
+        settle_bill
+        <where>
+            <if test="brandId != null">
+                AND brand_id = #{brandId,jdbcType=VARCHAR}
+            </if>
+            <if test="storeId != null">
+                AND store_id = #{storeId,jdbcType=VARCHAR}
+            </if>
+            <if test="entityType != null">
+                AND entity_type = #{entityType,jdbcType=SMALLINT}
+            </if>
+            <if test="beginTime != null">
+                and trade_date_start <![CDATA[>=]]> #{beginTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime != null">
+                and trade_date_end <![CDATA[<=]]> #{endTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+        order by trade_date_start DESC
+    </select>
+
+    <select id="getCommissionSum" resultType="java.lang.Long" parameterType="com.hanyun.platform.settle.vo.commissionbill.QueryCommissionPara" >
+        SELECT
+        sum(today_commission) as today_commission
+        FROM
+        settle_bill
+        <where>
+            <if test="brandId != null">
+                AND brand_id = #{brandId,jdbcType=VARCHAR}
+            </if>
+            <if test="storeId != null">
+                AND store_id = #{storeId,jdbcType=VARCHAR}
+            </if>
+            <if test="entityType != null">
+                AND entity_type = #{entityType,jdbcType=SMALLINT}
+            </if>
+            <if test="beginTime != null">
+                and trade_date_start <![CDATA[>=]]> #{beginTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime != null">
+                and trade_date_end <![CDATA[<=]]> #{endTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+
+    <select id="getStoreFlowAmtSum" resultType="java.lang.Long" >
+        SELECT
+        SUM(total_flow_amt) AS total_store_flow_ant
+        FROM
+        settle_bill
+        <where>
+            <if test="brandId != null">
+                AND brand_id = #{brandId,jdbcType=VARCHAR}
+            </if>
+            <if test="separateSettle != null">
+                AND separate_settle = #{separateSettle,jdbcType=VARCHAR}
+            </if>
+            <if test="entityType != null">
+                AND entity_type = #{entityType,jdbcType=TINYINT}
+            </if>
+            <if test="tradeDateStart != null">
+                AND trade_date_start =  #{tradeDateStart,jdbcType=DATE}
+            </if>
+        </where>
+    </select>
+
+    <select id="getSumCommissionDeducted" resultType="java.lang.Long" >
+        SELECT
+        SUM(commission_deduction) AS commission_deduction
+        FROM
+        settle_bill
+        <where>
+            <if test="brandId != null">
+                AND brand_id = #{brandId,jdbcType=VARCHAR}
+            </if>
+            <if test="storeId != null">
+                AND store_id = #{storeId,jdbcType=VARCHAR}
+            </if>
+            <if test="separateSettle != null">
+                AND separate_settle = #{separateSettle,jdbcType=TINYINT}
+            </if>
+            <if test="entityType != null">
+                AND entity_type = #{entityType,jdbcType=TINYINT}
+            </if>
+            <if test="tradeDateStart != null">
+                AND trade_date_start =  #{tradeDateStart,jdbcType=DATE}
+            </if>
+        </where>
+    </select>
+
+    <select id="getSumCosssionAmount" resultType="java.lang.Long" parameterType="com.hanyun.platform.settle.vo.commissionbill.QueryCommissionPara">
+        SELECT
+            sum(today_commission) today_commission
+        FROM
+        settle_bill
+        <where>
+            brand_id = #{brandId,jdbcType=VARCHAR}
+            <if test="storeId != null">
+                AND store_id = #{storeId,jdbcType=VARCHAR}
+            </if>
+            <if test="entityType != null">
+                AND entity_type = #{entityType,jdbcType=SMALLINT}
+            </if>
+            <if test="tradeDateStart != null">
+                and trade_date_start <![CDATA[>=]]> #{tradeDateStart,jdbcType=TIMESTAMP}
+            </if>
+            <if test="tradeDateEnd != null">
+                and trade_date_end <![CDATA[<=]]> #{tradeDateEnd,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+
+    <select id="getNoSettlement" resultMap="BaseResultMap">
+        SELECT
+          <include refid="Base_Column_List"/>
+        FROM
+          settle_bill
+        <where>
+            brand_id = #{brandId,jdbcType=VARCHAR}
+            <if test="storeId != null">
+                AND store_id = #{storeId,jdbcType=VARCHAR}
+            </if>
+            <if test="entityType != null">
+                AND entity_type = #{entityType,jdbcType=SMALLINT}
+            </if>
+            <if test="tradeDateStart != null">
+                AND trade_date_start <![CDATA[>]]> #{tradeDateStart,jdbcType=TIMESTAMP}
+            </if>
+            <if test="tradeDateEnd != null">
+                AND trade_date_start <![CDATA[<=]]> #{tradeDateEnd,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+
+    <select id="getPlatformActualRecAmt" resultType="java.lang.Long" >
+        SELECT
+        SUM(platform_actual_rec_amt) AS platform_actual_rec_amt
+        FROM
+        settle_bill
+        <where>
+            <if test="brandId != null">
+                AND brand_id = #{brandId,jdbcType=VARCHAR}
+            </if>
+            <if test="separateSettle != null">
+                AND separate_settle = #{separateSettle,jdbcType=TINYINT}
+            </if>
+            <if test="entityType != null">
+                AND entity_type = #{entityType,jdbcType=TINYINT}
+            </if>
+            <if test="tradeDateStart != null">
+                AND trade_date_start =  #{tradeDateStart,jdbcType=DATE}
+            </if>
+        </where>
+    </select>
+
+</mapper>

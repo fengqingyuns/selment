@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--suppress ALL -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hanyun.platform.settle.dao.SettleBillPaychnDao">
+    <resultMap id="BaseResultMap" type="com.hanyun.platform.settle.domain.SettleBillPaychn">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="pay_type_category" property="payTypeCategory" jdbcType="VARCHAR"/>
+        <result column="bill_id" property="billId" jdbcType="VARCHAR"/>
+        <result column="entity_id" property="entityId" jdbcType="VARCHAR"/>
+        <result column="brand_id" property="brandId" jdbcType="VARCHAR"/>
+        <result column="store_id" property="storeId" jdbcType="VARCHAR"/>
+        <result column="total_flow_amt" property="totalFlowAmt" jdbcType="BIGINT"/>
+        <result column="pay_fee" property="payFee" jdbcType="BIGINT"/>
+        <result column="entity_shalt_rec_amt" property="entityShaltRecAmt" jdbcType="BIGINT"/>
+        <result column="entity_actual_rec_amt" property="entityActualRecAmt" jdbcType="BIGINT"/>
+        <result column="bank_collect_amt" property="bankCollectAmt" jdbcType="BIGINT"/>
+        <result column="platform_actual_rec_amt" property="platformActualRecAmt" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <resultMap id="ListMap" type="com.hanyun.platform.settle.domain.SettleBillPaychn">
+        <result column="bill_id" property="billId" jdbcType="VARCHAR"/>
+        <result column="entity_id" property="entityId" jdbcType="VARCHAR"/>
+        <result column="brand_id" property="brandId" jdbcType="VARCHAR"/>
+        <result column="store_id" property="storeId" jdbcType="VARCHAR"/>
+        <result column="total_flow_amt" property="totalFlowAmt" jdbcType="BIGINT"/>
+        <result column="pay_fee" property="payFee" jdbcType="BIGINT"/>
+        <result column="entity_shalt_rec_amt" property="entityShaltRecAmt" jdbcType="BIGINT"/>
+        <result column="entity_actual_rec_amt" property="entityActualRecAmt" jdbcType="BIGINT"/>
+        <result column="bank_collect_amt" property="bankCollectAmt" jdbcType="BIGINT"/>
+        <result column="platform_actual_rec_amt" property="platformActualRecAmt" jdbcType="BIGINT"/>
+        <result column="pay_type_category" property="payTypeCategory" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, create_time, update_time, pay_type_category, bill_id, entity_id, brand_id, store_id, total_flow_amt, pay_fee, entity_shalt_rec_amt, entity_actual_rec_amt, bank_collect_amt, platform_actual_rec_amt
+    </sql>
+    
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.hanyun.platform.settle.domain.SettleBillPaychn">
+        SELECT 
+        <include refid="Base_Column_List"/>
+        FROM settle_bill_paychn
+        WHERE bill_id = #{billId,jdbcType=VARCHAR}
+            AND pay_type_category = #{payTypeCategory,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="selectSelective" resultMap="BaseResultMap" parameterType="com.hanyun.platform.settle.domain.SettleBillPaychn">
+        SELECT 
+        <include refid="Base_Column_List"/>
+        FROM settle_bill_paychn
+        <where>
+            <if test="createTime != null">
+                AND create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null">
+                AND update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="payTypeCategory != null">
+                AND pay_type_category = #{payTypeCategory,jdbcType=VARCHAR}
+            </if>
+            <if test="billId != null">
+                AND bill_id = #{billId,jdbcType=VARCHAR}
+            </if>
+            <if test="entityId != null">
+                AND entity_id = #{entityId,jdbcType=VARCHAR}
+            </if>
+            <if test="brandId != null">
+                AND brand_id = #{brandId,jdbcType=VARCHAR}
+            </if>
+            <if test="storeId != null">
+                AND store_id = #{storeId,jdbcType=VARCHAR}
+            </if>
+            <if test="totalFlowAmt != null">
+                AND total_flow_amt = #{totalFlowAmt,jdbcType=BIGINT}
+            </if>
+            <if test="payFee != null">
+                AND pay_fee = #{payFee,jdbcType=BIGINT}
+            </if>
+            <if test="entityShaltRecAmt != null">
+                AND entity_shalt_rec_amt = #{entityShaltRecAmt,jdbcType=BIGINT}
+            </if>
+            <if test="entityActualRecAmt != null">
+                AND entity_actual_rec_amt = #{entityActualRecAmt,jdbcType=BIGINT}
+            </if>
+            <if test="bankCollectAmt != null">
+                AND bank_collect_amt = #{bankCollectAmt,jdbcType=BIGINT}
+            </if>
+            <if test="platformActualRecAmt != null">
+                AND platform_actual_rec_amt = #{platformActualRecAmt,jdbcType=BIGINT}
+            </if>
+        </where>
+    </select>
+    
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        DELETE FROM settle_bill_paychn
+        WHERE id = #{id,jdbcType=BIGINT}
+    </delete>
+    
+    <insert id="insertSelective" parameterType="com.hanyun.platform.settle.domain.SettleBillPaychn">
+        INSERT INTO settle_bill_paychn
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="payTypeCategory != null">
+                pay_type_category,
+            </if>
+            <if test="billId != null">
+                bill_id,
+            </if>
+            <if test="entityId != null">
+                entity_id,
+            </if>
+            <if test="brandId != null">
+                brand_id,
+            </if>
+            <if test="storeId != null">
+                store_id,
+            </if>
+            <if test="totalFlowAmt != null">
+                total_flow_amt,
+            </if>
+            <if test="payFee != null">
+                pay_fee,
+            </if>
+            <if test="entityShaltRecAmt != null">
+                entity_shalt_rec_amt,
+            </if>
+            <if test="entityActualRecAmt != null">
+                entity_actual_rec_amt,
+            </if>
+            <if test="bankCollectAmt != null">
+                bank_collect_amt,
+            </if>
+            <if test="platformActualRecAmt != null">
+                platform_actual_rec_amt,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="payTypeCategory != null">
+                #{payTypeCategory,jdbcType=VARCHAR},
+            </if>
+            <if test="billId != null">
+                #{billId,jdbcType=VARCHAR},
+            </if>
+            <if test="entityId != null">
+                #{entityId,jdbcType=VARCHAR},
+            </if>
+            <if test="brandId != null">
+                #{brandId,jdbcType=VARCHAR},
+            </if>
+            <if test="storeId != null">
+                #{storeId,jdbcType=VARCHAR},
+            </if>
+            <if test="totalFlowAmt != null">
+                #{totalFlowAmt,jdbcType=BIGINT},
+            </if>
+            <if test="payFee != null">
+                #{payFee,jdbcType=BIGINT},
+            </if>
+            <if test="entityShaltRecAmt != null">
+                #{entityShaltRecAmt,jdbcType=BIGINT},
+            </if>
+            <if test="entityActualRecAmt != null">
+                #{entityActualRecAmt,jdbcType=BIGINT},
+            </if>
+            <if test="bankCollectAmt != null">
+                #{bankCollectAmt,jdbcType=BIGINT},
+            </if>
+            <if test="platformActualRecAmt != null">
+                #{platformActualRecAmt,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    
+    <update id="updateByPrimaryKeySelective" parameterType="com.hanyun.platform.settle.domain.SettleBillPaychn">
+        UPDATE settle_bill_paychn
+        <set>
+            update_time = now(),
+            <if test="totalFlowAmt != null">
+                total_flow_amt = #{totalFlowAmt,jdbcType=BIGINT},
+            </if>
+            <if test="payFee != null">
+                pay_fee = #{payFee,jdbcType=BIGINT},
+            </if>
+            <if test="entityShaltRecAmt != null">
+                entity_shalt_rec_amt = #{entityShaltRecAmt,jdbcType=BIGINT},
+            </if>
+            <if test="entityActualRecAmt != null">
+                entity_actual_rec_amt = #{entityActualRecAmt,jdbcType=BIGINT},
+            </if>
+            <if test="bankCollectAmt != null">
+                bank_collect_amt = #{bankCollectAmt,jdbcType=BIGINT},
+            </if>
+            <if test="platformActualRecAmt != null">
+                platform_actual_rec_amt = #{platformActualRecAmt,jdbcType=BIGINT},
+            </if>
+        </set>
+        WHERE bill_id = #{billId,jdbcType=VARCHAR}
+            AND pay_type_category = #{payTypeCategory,jdbcType=VARCHAR}
+    </update>
+
+
+    <select id="getSettlePayChnList" resultMap="ListMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM settle_bill_paychn
+        <where>
+            <if test="brandId != null">
+                AND brand_id = #{brandId,jdbcType=VARCHAR}
+            </if>
+            <if test="storeId != null">
+                AND store_id = #{storeId,jdbcType=VARCHAR}
+            </if>
+            <if test="billId != null">
+                AND bill_id = #{billId,jdbcType=VARCHAR}
+            </if>
+        </where>
+
+    </select>
+
+    <select id="sumSettleBillPayChn" resultMap="ListMap">
+        SELECT
+          SUM(total_flow_amt) total_flow_amt,
+          SUM(pay_fee) pay_fee,
+          SUM(entity_actual_rec_amt) entity_actual_rec_amt,
+          SUM(entity_shalt_rec_amt) entity_shalt_rec_amt,
+          SUM(platform_actual_rec_amt) platform_actual_rec_amt
+        FROM settle_bill_paychn
+        <where>
+            <if test="brandId != null">
+                AND brand_id = #{brandId,jdbcType=VARCHAR}
+            </if>
+            <if test="storeId != null">
+                AND store_id = #{storeId,jdbcType=VARCHAR}
+            </if>
+            <if test="billId != null">
+                AND bill_id = #{billId,jdbcType=VARCHAR}
+            </if>
+            <if test="payTypeCategory != null">
+                AND pay_type_category = #{payTypeCategory,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <select id="getSummarySettleBillPayChn" resultMap="ListMap" parameterType="com.hanyun.platform.settle.vo.settlebill.SettleBillListReq">
+        SELECT a.pay_type_category, SUM(a.total_flow_amt) AS total_flow_amt FROM settle_bill_paychn a, settle_bill b
+        <where>
+            a.bill_id = b.bill_id
+            <if test="brandId != null">
+                AND a.brand_id = #{brandId,jdbcType=VARCHAR}
+            </if>
+            <if test="storeId != null">
+                AND a.store_id = #{storeId,jdbcType=VARCHAR}
+            </if>
+            <if test="storeId == null">
+                AND a.store_id is null
+            </if>
+            <if test="beginTime != null">
+                and b.trade_date_start <![CDATA[>=]]>#{beginTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime != null">
+                and b.trade_date_start <![CDATA[<=]]> #{endTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+        group by pay_type_category
+    </select>
+</mapper>

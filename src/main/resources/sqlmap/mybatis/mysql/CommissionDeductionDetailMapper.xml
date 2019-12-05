@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--suppress ALL -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hanyun.platform.settle.dao.CommissionDeductionDetailDao">
+    <resultMap id="BaseResultMap" type="com.hanyun.platform.settle.domain.CommissionDeductionDetail">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="commission_deduction_id" property="commissionDeductionId" jdbcType="VARCHAR"/>
+        <result column="commission_bill_id" property="commissionBillId" jdbcType="VARCHAR"/>
+        <result column="bill_id" property="billId" jdbcType="VARCHAR"/>
+        <result column="brand_id" property="brandId" jdbcType="VARCHAR"/>
+        <result column="store_id" property="storeId" jdbcType="VARCHAR"/>
+        <result column="brand_name" property="brandName" jdbcType="VARCHAR"/>
+        <result column="store_name" property="storeName" jdbcType="VARCHAR"/>
+        <result column="trade_date_start" property="tradeDateStart" jdbcType="DATE"/>
+        <result column="trade_date_end" property="tradeDateEnd" jdbcType="DATE"/>
+        <result column="commission_settle_type" property="commissionSettleType" jdbcType="TINYINT"/>
+        <result column="commission_amount" property="commissionAmount" jdbcType="BIGINT"/>
+        <result column="deduction_amount" property="deductionAmount" jdbcType="BIGINT"/>
+        <result column="settled_amount" property="settledAmount" jdbcType="BIGINT"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, create_time, update_time, commission_deduction_id, commission_bill_id, bill_id, brand_id, store_id, brand_name, store_name, trade_date_start, trade_date_end, commission_settle_type, commission_amount, 
+        deduction_amount, settled_amount, remark
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        SELECT 
+        <include refid="Base_Column_List"/>
+        FROM commission_deduction_detail
+        WHERE id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="selectByParameter" resultMap="BaseResultMap" parameterType="com.hanyun.platform.settle.domain.CommissionDeductionDetail">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM commission_deduction_detail
+        <where>
+            <if test="createTime != null">
+                AND create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null">
+                AND update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="commissionDeductionId != null">
+                AND commission_deduction_id = #{commissionDeductionId,jdbcType=VARCHAR}
+            </if>
+            <if test="commissionBillId != null">
+                AND commission_bill_id = #{commissionBillId,jdbcType=VARCHAR}
+            </if>
+            <if test="billId != null">
+                AND bill_id = #{billId,jdbcType=VARCHAR}
+            </if>
+            <if test="brandId != null">
+                AND brand_id = #{brandId,jdbcType=VARCHAR}
+            </if>
+            <if test="storeId != null">
+                AND store_id = #{storeId,jdbcType=VARCHAR}
+            </if>
+            <if test="brandName != null">
+                AND brand_name = #{brandName,jdbcType=VARCHAR}
+            </if>
+            <if test="storeName != null">
+                AND store_name = #{storeName,jdbcType=VARCHAR}
+            </if>
+            <if test="tradeDateStart != null">
+                AND trade_date_start = #{tradeDateStart,jdbcType=DATE}
+            </if>
+            <if test="tradeDateEnd != null">
+                AND trade_date_end = #{tradeDateEnd,jdbcType=DATE}
+            </if>
+            <if test="commissionSettleType != null">
+                AND commission_settle_type = #{commissionSettleType,jdbcType=TINYINT}
+            </if>
+            <if test="commissionAmount != null">
+                AND commission_amount = #{commissionAmount,jdbcType=BIGINT}
+            </if>
+            <if test="deductionAmount != null">
+                AND deduction_amount = #{deductionAmount,jdbcType=BIGINT}
+            </if>
+            <if test="settledAmount != null">
+                AND settled_amount = #{settledAmount,jdbcType=BIGINT}
+            </if>
+            <if test="remark != null">
+                AND remark = #{remark,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+    <select id="selectSelective" resultMap="BaseResultMap" parameterType="com.hanyun.platform.settle.domain.CommissionDeductionDetail">
+        SELECT 
+        <include refid="Base_Column_List"/>
+        FROM commission_deduction_detail
+        <where>
+            <if test="createTime != null">
+                AND create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null">
+                AND update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="commissionDeductionId != null">
+                AND commission_deduction_id = #{commissionDeductionId,jdbcType=VARCHAR}
+            </if>
+            <if test="commissionBillId != null">
+                AND commission_bill_id = #{commissionBillId,jdbcType=VARCHAR}
+            </if>
+            <if test="billId != null">
+                AND bill_id = #{billId,jdbcType=VARCHAR}
+            </if>
+            <if test="brandId != null">
+                AND brand_id = #{brandId,jdbcType=VARCHAR}
+            </if>
+            <if test="storeId != null">
+                AND store_id = #{storeId,jdbcType=VARCHAR}
+            </if>
+            <if test="brandName != null">
+                AND brand_name = #{brandName,jdbcType=VARCHAR}
+            </if>
+            <if test="storeName != null">
+                AND store_name = #{storeName,jdbcType=VARCHAR}
+            </if>
+            <if test="tradeDateStart != null">
+                AND trade_date_start = #{tradeDateStart,jdbcType=DATE}
+            </if>
+            <if test="tradeDateEnd != null">
+                AND trade_date_end = #{tradeDateEnd,jdbcType=DATE}
+            </if>
+            <if test="commissionSettleType != null">
+                AND commission_settle_type = #{commissionSettleType,jdbcType=TINYINT}
+            </if>
+            <if test="commissionAmount != null">
+                AND commission_amount = #{commissionAmount,jdbcType=BIGINT}
+            </if>
+            <if test="deductionAmount != null">
+                AND deduction_amount = #{deductionAmount,jdbcType=BIGINT}
+            </if>
+            <if test="settledAmount != null">
+                AND settled_amount = #{settledAmount,jdbcType=BIGINT}
+            </if>
+            <if test="remark != null">
+                AND remark = #{remark,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        DELETE FROM commission_deduction_detail
+        WHERE id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insertSelective" parameterType="com.hanyun.platform.settle.domain.CommissionDeductionDetail">
+        INSERT INTO commission_deduction_detail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="commissionDeductionId != null">
+                commission_deduction_id,
+            </if>
+            <if test="commissionBillId != null">
+                commission_bill_id,
+            </if>
+            <if test="billId != null">
+                bill_id,
+            </if>
+            <if test="brandId != null">
+                brand_id,
+            </if>
+            <if test="storeId != null">
+                store_id,
+            </if>
+            <if test="brandName != null">
+                brand_name,
+            </if>
+            <if test="storeName != null">
+                store_name,
+            </if>
+            <if test="tradeDateStart != null">
+                trade_date_start,
+            </if>
+            <if test="tradeDateEnd != null">
+                trade_date_end,
+            </if>
+            <if test="commissionSettleType != null">
+                commission_settle_type,
+            </if>
+            <if test="commissionAmount != null">
+                commission_amount,
+            </if>
+            <if test="deductionAmount != null">
+                deduction_amount,
+            </if>
+            <if test="settledAmount != null">
+                settled_amount,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="commissionDeductionId != null">
+                #{commissionDeductionId,jdbcType=VARCHAR},
+            </if>
+            <if test="commissionBillId != null">
+                #{commissionBillId,jdbcType=VARCHAR},
+            </if>
+            <if test="billId != null">
+                #{billId,jdbcType=VARCHAR},
+            </if>
+            <if test="brandId != null">
+                #{brandId,jdbcType=VARCHAR},
+            </if>
+            <if test="storeId != null">
+                #{storeId,jdbcType=VARCHAR},
+            </if>
+            <if test="brandName != null">
+                #{brandName,jdbcType=VARCHAR},
+            </if>
+            <if test="storeName != null">
+                #{storeName,jdbcType=VARCHAR},
+            </if>
+            <if test="tradeDateStart != null">
+                #{tradeDateStart,jdbcType=DATE},
+            </if>
+            <if test="tradeDateEnd != null">
+                #{tradeDateEnd,jdbcType=DATE},
+            </if>
+            <if test="commissionSettleType != null">
+                #{commissionSettleType,jdbcType=TINYINT},
+            </if>
+            <if test="commissionAmount != null">
+                #{commissionAmount,jdbcType=BIGINT},
+            </if>
+            <if test="deductionAmount != null">
+                #{deductionAmount,jdbcType=BIGINT},
+            </if>
+            <if test="settledAmount != null">
+                #{settledAmount,jdbcType=BIGINT},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hanyun.platform.settle.domain.CommissionDeductionDetail">
+        UPDATE commission_deduction_detail
+        <set>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="commissionDeductionId != null">
+                commission_deduction_id = #{commissionDeductionId,jdbcType=VARCHAR},
+            </if>
+            <if test="commissionBillId != null">
+                commission_bill_id = #{commissionBillId,jdbcType=VARCHAR},
+            </if>
+            <if test="billId != null">
+                bill_id = #{billId,jdbcType=VARCHAR},
+            </if>
+            <if test="brandId != null">
+                brand_id = #{brandId,jdbcType=VARCHAR},
+            </if>
+            <if test="storeId != null">
+                store_id = #{storeId,jdbcType=VARCHAR},
+            </if>
+            <if test="brandName != null">
+                brand_name = #{brandName,jdbcType=VARCHAR},
+            </if>
+            <if test="storeName != null">
+                store_name = #{storeName,jdbcType=VARCHAR},
+            </if>
+            <if test="tradeDateStart != null">
+                trade_date_start = #{tradeDateStart,jdbcType=DATE},
+            </if>
+            <if test="tradeDateEnd != null">
+                trade_date_end = #{tradeDateEnd,jdbcType=DATE},
+            </if>
+            <if test="commissionSettleType != null">
+                commission_settle_type = #{commissionSettleType,jdbcType=TINYINT},
+            </if>
+            <if test="commissionAmount != null">
+                commission_amount = #{commissionAmount,jdbcType=BIGINT},
+            </if>
+            <if test="deductionAmount != null">
+                deduction_amount = #{deductionAmount,jdbcType=BIGINT},
+            </if>
+            <if test="settledAmount != null">
+                settled_amount = #{settledAmount,jdbcType=BIGINT},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        WHERE id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="selectBycommissionBillId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM commission_deduction_detail
+        <where>
+            <if test="commissionBillId != null">
+                AND commission_bill_id = #{commissionBillId,jdbcType=VARCHAR}
+            </if>
+        </where>
+        ORDER BY create_time DESC;
+    </select>
+
+    <update id="updateCommissionAmountByCommissionBillId" parameterType="com.hanyun.platform.settle.domain.CommissionDeductionDetail">
+        UPDATE commission_deduction_detail
+        <set>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="commissionAmount != null">
+                commission_amount = #{commissionAmount,jdbcType=BIGINT},
+            </if>
+        </set>
+        WHERE commission_bill_id = #{commissionBillId,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateCommissionDeductionAmountByCommissionBillId" parameterType="com.hanyun.platform.settle.domain.CommissionDeductionDetail">
+        UPDATE commission_deduction_detail
+        <set>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deductionAmount != null">
+                deduction_amount = #{deductionAmount,jdbcType=BIGINT},
+            </if>
+            <if test="settledAmount != null">
+                settled_amount = #{settledAmount,jdbcType=BIGINT},
+            </if>
+        </set>
+        WHERE
+            commission_deduction_id = #{commissionDeductionId,jdbcType=VARCHAR}
+    </update>
+    <select id="selectBySettleBill" resultMap="BaseResultMap" parameterType="com.hanyun.platform.settle.domain.CommissionDeductionDetail">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM commission_deduction_detail
+        <where>
+            <if test="billId != null">
+                AND bill_id = #{billId,jdbcType=VARCHAR}
+            </if>
+            <if test="brandId != null">
+                AND brand_id = #{brandId,jdbcType=VARCHAR}
+            </if>
+            <if test="storeId != null">
+                AND store_id = #{storeId,jdbcType=VARCHAR}
+            </if>
+        </where>
+        ORDER BY trade_date_start
+    </select>
+
+    <select id="sumDeduction" resultType="java.lang.Long" parameterType="com.hanyun.platform.settle.domain.CommissionDeductionDetail">
+        SELECT
+        sum(deduction_amount) as deduction_amount
+        FROM commission_deduction_detail
+        <where>
+            bill_id = #{billId,jdbcType=VARCHAR}
+        </where>
+    </select>
+
+</mapper>

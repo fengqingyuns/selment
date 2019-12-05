@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--suppress ALL -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hanyun.platform.settle.dao.CommissionBillDao">
+    <resultMap id="BaseResultMap" type="com.hanyun.platform.settle.domain.CommissionBill">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="commission_bill_id" property="commissionBillId" jdbcType="VARCHAR"/>
+        <result column="entity_id" property="entityId" jdbcType="VARCHAR"/>
+        <result column="entity_type" property="entityType" jdbcType="TINYINT"/>
+        <result column="entity_name" property="entityName" jdbcType="VARCHAR"/>
+        <result column="brand_id" property="brandId" jdbcType="VARCHAR"/>
+        <result column="brand_name" property="brandName" jdbcType="VARCHAR"/>
+        <result column="store_id" property="storeId" jdbcType="VARCHAR"/>
+        <result column="store_name" property="storeName" jdbcType="VARCHAR"/>
+        <result column="trade_date_start" property="tradeDateStart" jdbcType="DATE"/>
+        <result column="trade_date_end" property="tradeDateEnd" jdbcType="DATE"/>
+        <result column="commission_bill_circle" property="commissionBillCircle" jdbcType="TINYINT"/>
+        <result column="commission_bill_status" property="commissionBillStatus" jdbcType="TINYINT"/>
+        <result column="commission_amount" property="commissionAmount" jdbcType="BIGINT"/>
+        <result column="settled_amount" property="settledAmount" jdbcType="BIGINT"/>
+        <result column="online_commission" property="onlineCommission" jdbcType="TINYINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, commission_bill_id, entity_id, entity_type, entity_name, brand_id, brand_name, store_id, store_name, trade_date_start, trade_date_end, commission_bill_circle, commission_bill_status, commission_amount, 
+        settled_amount, online_commission, create_time, update_time
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT 
+        <include refid="Base_Column_List"/>
+        FROM commission_bill
+        WHERE commission_bill_id = #{commissionBillId,jdbcType=VARCHAR}
+    </select>
+    <select id="selectSelective" resultMap="BaseResultMap" parameterType="com.hanyun.platform.settle.domain.CommissionBill">
+        SELECT 
+        <include refid="Base_Column_List"/>
+        FROM commission_bill
+        <where>
+            <if test="commissionBillId != null">
+                AND commission_bill_id = #{commissionBillId,jdbcType=VARCHAR}
+            </if>
+            <if test="entityId != null">
+                AND entity_id = #{entityId,jdbcType=VARCHAR}
+            </if>
+            <if test="entityType != null">
+                AND entity_type = #{entityType,jdbcType=TINYINT}
+            </if>
+            <if test="entityName != null">
+                AND entity_name = #{entityName,jdbcType=VARCHAR}
+            </if>
+            <if test="brandId != null">
+                AND brand_id = #{brandId,jdbcType=VARCHAR}
+            </if>
+            <if test="brandName != null">
+                AND brand_name = #{brandName,jdbcType=VARCHAR}
+            </if>
+            <if test="storeId != null">
+                AND store_id = #{storeId,jdbcType=VARCHAR}
+            </if>
+            <if test="storeName != null">
+                AND store_name = #{storeName,jdbcType=VARCHAR}
+            </if>
+            <if test="tradeDateStart != null">
+                AND trade_date_start = #{tradeDateStart,jdbcType=DATE}
+            </if>
+            <if test="tradeDateEnd != null">
+                AND trade_date_end = #{tradeDateEnd,jdbcType=DATE}
+            </if>
+            <if test="commissionBillCircle != null">
+                AND commission_bill_circle = #{commissionBillCircle,jdbcType=TINYINT}
+            </if>
+            <if test="commissionBillStatus != null">
+                AND commission_bill_status = #{commissionBillStatus,jdbcType=TINYINT}
+            </if>
+            <if test="commissionAmount != null">
+                AND commission_amount = #{commissionAmount,jdbcType=BIGINT}
+            </if>
+            <if test="settledAmount != null">
+                AND settled_amount = #{settledAmount,jdbcType=BIGINT}
+            </if>
+            <if test="onlineCommission != null">
+                AND online_commission = #{onlineCommission,jdbcType=TINYINT}
+            </if>
+            <if test="createTime != null">
+                AND create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null">
+                AND update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        DELETE FROM commission_bill
+        WHERE id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insertSelective" parameterType="com.hanyun.platform.settle.domain.CommissionBill">
+        INSERT INTO commission_bill
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="commissionBillId != null">
+                commission_bill_id,
+            </if>
+            <if test="entityId != null">
+                entity_id,
+            </if>
+            <if test="entityType != null">
+                entity_type,
+            </if>
+            <if test="entityName != null">
+                entity_name,
+            </if>
+            <if test="brandId != null">
+                brand_id,
+            </if>
+            <if test="brandName != null">
+                brand_name,
+            </if>
+            <if test="storeId != null">
+                store_id,
+            </if>
+            <if test="storeName != null">
+                store_name,
+            </if>
+            <if test="tradeDateStart != null">
+                trade_date_start,
+            </if>
+            <if test="tradeDateEnd != null">
+                trade_date_end,
+            </if>
+            <if test="commissionBillCircle != null">
+                commission_bill_circle,
+            </if>
+            <if test="commissionBillStatus != null">
+                commission_bill_status,
+            </if>
+            <if test="commissionAmount != null">
+                commission_amount,
+            </if>
+            <if test="settledAmount != null">
+                settled_amount,
+            </if>
+            <if test="onlineCommission != null">
+                online_commission,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="commissionBillId != null">
+                #{commissionBillId,jdbcType=VARCHAR},
+            </if>
+            <if test="entityId != null">
+                #{entityId,jdbcType=VARCHAR},
+            </if>
+            <if test="entityType != null">
+                #{entityType,jdbcType=TINYINT},
+            </if>
+            <if test="entityName != null">
+                #{entityName,jdbcType=VARCHAR},
+            </if>
+            <if test="brandId != null">
+                #{brandId,jdbcType=VARCHAR},
+            </if>
+            <if test="brandName != null">
+                #{brandName,jdbcType=VARCHAR},
+            </if>
+            <if test="storeId != null">
+                #{storeId,jdbcType=VARCHAR},
+            </if>
+            <if test="storeName != null">
+                #{storeName,jdbcType=VARCHAR},
+            </if>
+            <if test="tradeDateStart != null">
+                #{tradeDateStart,jdbcType=DATE},
+            </if>
+            <if test="tradeDateEnd != null">
+                #{tradeDateEnd,jdbcType=DATE},
+            </if>
+            <if test="commissionBillCircle != null">
+                #{commissionBillCircle,jdbcType=TINYINT},
+            </if>
+            <if test="commissionBillStatus != null">
+                #{commissionBillStatus,jdbcType=TINYINT},
+            </if>
+            <if test="commissionAmount != null">
+                #{commissionAmount,jdbcType=BIGINT},
+            </if>
+            <if test="settledAmount != null">
+                #{settledAmount,jdbcType=BIGINT},
+            </if>
+            <if test="onlineCommission != null">
+                #{onlineCommission,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hanyun.platform.settle.domain.CommissionBill">
+        UPDATE commission_bill
+        <set>
+            <if test="entityId != null">
+                entity_id = #{entityId,jdbcType=VARCHAR},
+            </if>
+            <if test="entityType != null">
+                entity_type = #{entityType,jdbcType=TINYINT},
+            </if>
+            <if test="entityName != null">
+                entity_name = #{entityName,jdbcType=VARCHAR},
+            </if>
+            <if test="brandId != null">
+                brand_id = #{brandId,jdbcType=VARCHAR},
+            </if>
+            <if test="brandName != null">
+                brand_name = #{brandName,jdbcType=VARCHAR},
+            </if>
+            <if test="storeId != null">
+                store_id = #{storeId,jdbcType=VARCHAR},
+            </if>
+            <if test="storeName != null">
+                store_name = #{storeName,jdbcType=VARCHAR},
+            </if>
+            <if test="tradeDateStart != null">
+                trade_date_start = #{tradeDateStart,jdbcType=DATE},
+            </if>
+            <if test="tradeDateEnd != null">
+                trade_date_end = #{tradeDateEnd,jdbcType=DATE},
+            </if>
+            <if test="commissionBillCircle != null">
+                commission_bill_circle = #{commissionBillCircle,jdbcType=TINYINT},
+            </if>
+            <if test="commissionBillStatus != null">
+                commission_bill_status = #{commissionBillStatus,jdbcType=TINYINT},
+            </if>
+            <if test="commissionAmount != null">
+                commission_amount = #{commissionAmount,jdbcType=BIGINT},
+            </if>
+            <if test="settledAmount != null">
+                settled_amount = #{settledAmount,jdbcType=BIGINT},
+            </if>
+            <if test="onlineCommission != null">
+                online_commission = #{onlineCommission,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        WHERE commission_bill_id = #{commissionBillId,jdbcType=VARCHAR}
+    </update>
+
+    <select id="query" resultMap="BaseResultMap" parameterType="com.hanyun.platform.settle.vo.commissionbill.CommissionBillReq">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM commission_bill
+        <where>
+            <if test="commissionBillId != null">
+                AND commission_bill_id = #{commissionBillId,jdbcType=VARCHAR}
+            </if>
+            <if test="entityType != null">
+                AND entity_type = #{entityType,jdbcType=TINYINT}
+            </if>
+            <if test="brandId != null">
+                AND brand_id = #{brandId,jdbcType=VARCHAR}
+            </if>
+            <if test="storeId != null">
+                AND store_id = #{storeId,jdbcType=VARCHAR}
+            </if>
+            <if test="beginTime != null">
+                AND trade_date_start <![CDATA[>=]]> #{beginTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime != null">
+                AND trade_date_end <![CDATA[<=]]> #{endTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="commissionBillStatus != null">
+                AND commission_bill_status = #{commissionBillStatus,jdbcType=TINYINT}
+            </if>
+        </where>
+        ORDER BY create_time desc
+        LIMIT #{beginIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+    </select>
+
+    <select id="queryCount" resultType="java.lang.Integer" parameterType="com.hanyun.platform.settle.vo.commissionbill.CommissionBillReq">
+        SELECT
+        count(1)
+        FROM commission_bill
+        <where>
+            <if test="commissionBillId != null">
+                AND commission_bill_id = #{commissionBillId,jdbcType=VARCHAR}
+            </if>
+            <if test="entityType != null">
+                AND entity_type = #{entityType,jdbcType=TINYINT}
+            </if>
+            <if test="brandId != null">
+                AND brand_id = #{brandId,jdbcType=VARCHAR}
+            </if>
+            <if test="storeId != null">
+                AND store_id = #{storeId,jdbcType=VARCHAR}
+            </if>
+            <if test="beginTime != null">
+                AND trade_date_start <![CDATA[>=]]> #{beginTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime != null">
+                AND trade_date_end <![CDATA[<=]]> #{endTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="commissionBillStatus != null">
+                AND commission_bill_status = #{commissionBillStatus,jdbcType=TINYINT}
+            </if>
+        </where>
+        ORDER BY create_time desc
+    </select>
+
+    <select id="openTransfer" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM commission_bill
+        <where>
+              commission_bill_id IN
+            <foreach collection="commissionBillIds" item="cId" index="index"
+                     open="(" close=")" separator=",">
+                '${cId}'
+            </foreach>
+        </where>
+        ORDER BY create_time ASC
+    </select>
+
+    <select id="noSettlement" resultMap="BaseResultMap" parameterType="com.hanyun.platform.settle.domain.CommissionBill">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM commission_bill
+        <where>
+            commission_bill_status != 2
+            <if test="brandId != null">
+                AND brand_id = #{brandId,jdbcType=VARCHAR}
+            </if>
+            <if test="storeId != null">
+                AND store_id = #{storeId,jdbcType=VARCHAR}
+            </if>
+            <if test="entityType != null">
+                AND entity_type = #{entityType,jdbcType=TINYINT}
+            </if>
+            <if test="onlineCommission != null">
+                AND online_commission = #{onlineCommission,jdbcType=TINYINT}
+            </if>
+        </where>
+        ORDER BY trade_date_start
+    </select>
+
+    <select id="queryCommissionSettle" resultMap="BaseResultMap" parameterType="com.hanyun.platform.settle.vo.commissionbill.QueryCommissionPara">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM commission_bill
+        <where>
+            <if test="brandId != null">
+                AND brand_id = #{brandId,jdbcType=VARCHAR}
+            </if>
+            <if test="beginTime != null">
+                AND trade_date_start <![CDATA[<=]]> #{beginTime,jdbcType=DATE}
+            </if>
+            <if test="endTime != null">
+                AND trade_date_end <![CDATA[>=]]> #{endTime,jdbcType=DATE}
+            </if>
+        </where>
+        ORDER BY create_time desc
+    </select>
+
+</mapper>
